@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Docs · CoinFin</title>
+<meta name="description" content="CoinFin: agent-only share mining on BNB Smart Chain. Buy a share, harvest FIN daily, half of every payment deepens the PancakeSwap pool with burned LP.">
+<link rel="icon" href="/favicon.svg?v=1">
+<link rel="stylesheet" href="/style.css?v=1">
+</head>
+<body>
+<div class="strip"><span class="en">COINFIN · SHARE MINING · EVERY BUYER DEEPENS THE POOL</span><span class="zh">COINFIN · 份额挖矿 · 每位买家都在加深流动池</span></div>
+<header class="top"><div class="wrap top-in"><a class="logo" href="/"><svg width="34" height="34" viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M6 38c10 2 24-2 30-14 2-4 6-5 6-5s-1 5-3 9c8-3 11-10 12-16C42 16 34 22 26 25c-8 3-15 8-20 13z" fill="#ff7a1a"/><path d="M4 42c12 3 28 1 40-6" stroke="#19b8d6" stroke-width="3" stroke-linecap="round"/></svg>COINFIN</a><span class="langsw"><button id="swEn" onclick="setLang('en')">EN</button><button id="swZh" onclick="setLang('zh')">中文</button></span><nav class="main"><a href="/" class=""><span class="en">Home</span><span class="zh">首页</span></a><a href="/whitepaper.html" class=""><span class="en">Whitepaper</span><span class="zh">白皮书</span></a><a href="/tokenomics.html" class=""><span class="en">Tokenomics</span><span class="zh">代币经济</span></a><a href="/docs.html" class="on"><span class="en">Docs</span><span class="zh">文档</span></a></nav></div></header>
+
+<section class="blk"><div class="wrap prose">
+<div class="tag"><span class="en">Docs</span><span class="zh">文档</span></div>
+<h2><span class="en">How CoinFin works, step by step</span><span class="zh">CoinFin 如何运作，一步一步</span></h2>
+<h3><span class="en">Buying shares</span><span class="zh">购买份额</span></h3>
+<ul>
+<li><span class="en">You need a Binance Agentic Wallet agent and a Binance Agent ID in the same wallet. Without an Agent ID, the contract rejects the purchase.</span><span class="zh">你需要一个 Binance Agentic Wallet 代理，并且同一钱包中持有 Binance Agent ID。没有 Agent ID，合约会拒绝购买。</span></li>
+<li><span class="en">Copy the buy prompt from the homepage, or point your agent at the skill file: </span><span class="zh">复制首页的购买提示，或让你的代理读取技能文件：</span><span class="addr">https://coinfin.fun/coinfin-skill.md</span></li>
+<li><span class="en">Your agent quotes the exact BNB cost (shares times $0.20 in BNB, locked in the contract) and executes only after your confirmation in the Binance app flow.</span><span class="zh">你的代理会报出确切的 BNB 成本（份数乘以合约锁定的 0.20 美元等值），并在你确认后才执行。</span></li>
+<li><span class="en">Each purchase opens a position. Positions from separate purchases harvest independently and are all collected by one claim call.</span><span class="zh">每次购买开启一个仓位。不同购买的仓位独立收获，由一次领取统一收走。</span></li>
+</ul>
+<h3><span class="en">Harvesting</span><span class="zh">收获</span></h3>
+<ul>
+<li><span class="en">A position earns one unit per share per full day since purchase. Partial days do not count yet, and unclaimed days never expire.</span><span class="zh">仓位自购买起，每个完整日每份产生一个单位。不足一天的部分暂不计，未领取的天数永不过期。</span></li>
+<li><span class="en">Ask your agent to harvest. It reads your accumulated units, claims them all in one transaction, and FIN lands in your wallet. Claiming costs no fee, only network gas paid by your wallet.</span><span class="zh">让你的代理收获。它会读取你累积的单位，在一笔交易中全部领取，FIN 进入你的钱包。领取不收费，只需钱包支付网络 gas。</span></li>
+<li><span class="en">Rates halve as the network claims. Claiming earlier in an epoch pays the higher rate for every unit inside it.</span><span class="zh">费率随全网领取量减半。在周期内越早领取，该周期内的每个单位都按更高费率支付。</span></li>
+</ul>
+<h3><span class="en">FAQ</span><span class="zh">常见问题</span></h3>
+<p><b><span class="en">What is the Founder Round?</span><span class="zh">什么是创始人轮？</span></b><br><span class="en">A presale for the first 5,000 shares. Founder positions harvest 25% more units per day forever, receive 1,000 FIN per share after the round closes, and are marked on the site board. The round split is 70% project and 30% pool; public sale after the round is 50/50. The counter on the homepage is read live from the contract.</span><span class="zh">前 5,000 份份额的预售。创始人仓位每天多收获 25% 单位，永久有效，轮次结束后按每份获得 1,000 FIN，并在网站看板上标记。轮次分配为 70% 项目方、30% 流动池；轮次之后的公开销售为 50/50。首页计数器从合约实时读取。</span></p>
+<p><b><span class="en">Can I sell or transfer my shares?</span><span class="zh">我可以出售或转让份额吗？</span></b><br><span class="en">Positions are bound to the wallet that bought them and cannot be transferred. FIN itself is a normal token and trades freely on PancakeSwap once the pool is live.</span><span class="zh">仓位绑定购买钱包，不可转让。FIN 本身是普通代币，流动池上线后可在 PancakeSwap 自由交易。</span></p>
+<p><b><span class="en">What happens before the pool is seeded?</span><span class="zh">流动池注入之前会怎样？</span></b><br><span class="en">The liquidity half of every payment waits in the contract reserve, visible to everyone through a public getter. The engine starts processing automatically as soon as the pair exists. No reserve funds can be withdrawn by the owner.</span><span class="zh">每笔付款的流动性一半会留在合约储备中，任何人都能通过公开读取函数查看。交易对一旦存在，引擎自动开始处理。所有者无法提取储备资金。</span></p>
+<p><b><span class="en">Why does the price move when people buy shares?</span><span class="zh">为什么有人买份额时价格会动？</span></b><br><span class="en">Because the pool engine spends half of every payment inside the pool: it buys FIN with one quarter of the payment and pairs another quarter as new liquidity. New demand literally walks the price up and deepens the pool at the same time.</span><span class="zh">因为流动池引擎把每笔付款的一半花在池子里：用四分之一购买 FIN，再用四分之一配对为新流动性。新需求实实在在地推高价格，同时加深流动池。</span></p>
+<p><b><span class="en">Is this site a trading interface?</span><span class="zh">这个网站是交易界面吗？</span></b><br><span class="en">No. This site only publishes information, live counters read from the contracts, and the agent skill file. It never asks you to connect a wallet, and buying or claiming happens only through your own agent.</span><span class="zh">不是。本站只发布信息、从合约读取的实时计数以及代理技能文件。它从不要求连接钱包，购买与领取只经由你自己的代理。</span></p>
+<h3><span class="en">Contracts of record</span><span class="zh">官方合约</span></h3>
+<p><span class="en">FIN token</span><span class="zh">FIN 代币</span><br><span class="addr">0xB4C9efA5f217a75f48F3f58508ca1D70Df0d8CF4</span></p>
+<p><span class="en">Share sale and pool engine</span><span class="zh">份额销售与流动池引擎</span><br><span class="addr">0x1557e5B3bC821e5128A92fB3A94aECf2AF90676e</span></p>
+<p><span class="en">Harvest</span><span class="zh">收获合约</span><br><span class="addr">0xdf18D0E158abf572ffe34D9276bf3B0c196319aB</span></p>
+</div></section>
+
+<footer><div class="wrap">
+<div class="cols">
+<div><h4>CoinFin</h4><p style="max-width:340px"><span class="en">Buy a share through your agent, harvest FIN every day, and watch every purchase deepen the pool. Half of every payment becomes permanent liquidity. LP is burned.</span><span class="zh">通过你的代理购买一份份额，每天收获 FIN，并见证每一次购买加深流动池。每笔付款的一半成为永久流动性，LP 已销毁。</span></p></div>
+<div><h4><span class="en">Read</span><span class="zh">阅读</span></h4><a href="/whitepaper.html"><span class="en">Whitepaper</span><span class="zh">白皮书</span></a><a href="/tokenomics.html"><span class="en">Tokenomics</span><span class="zh">代币经济</span></a><a href="/docs.html"><span class="en">Docs and FAQ</span><span class="zh">文档与常见问题</span></a><a href="/coinfin-skill.md"><span class="en">Agent skill file</span><span class="zh">代理技能文件</span></a></div>
+<div><h4><span class="en">Contracts</span><span class="zh">合约</span></h4><a href="https://bscscan.com/token/0xB4C9efA5f217a75f48F3f58508ca1D70Df0d8CF4"><span class="en">FIN token</span><span class="zh">FIN 代币</span></a><a href="https://bscscan.com/address/0x1557e5B3bC821e5128A92fB3A94aECf2AF90676e"><span class="en">Share sale + pool engine</span><span class="zh">份额销售 + 流动池引擎</span></a><a href="https://bscscan.com/address/0xdf18D0E158abf572ffe34D9276bf3B0c196319aB"><span class="en">Harvest contract</span><span class="zh">收获合约</span></a></div>
+</div>
+<p class="fine">COINFIN · COINFIN.FUN · BNB SMART CHAIN · <span class="en">BUYING AND HARVESTING RUN ONLY THROUGH YOUR OWN BINANCE AGENTIC WALLET AGENT · THIS SITE NEVER ASKS YOU TO CONNECT A WALLET</span><span class="zh">购买与收获只经由你自己的 BINANCE AGENTIC WALLET 代理进行 · 本站永不要求连接钱包</span></p>
+</div></footer>
+<script src="/lang.js?v=1"></script>
+<script src="/app.js?v=1"></script>
+</body>
+</html>
