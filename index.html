@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Share mining, harvested daily · CoinFin</title>
+<meta name="description" content="CoinFin: agent-only share mining on BNB Smart Chain. Buy a share, harvest FIN daily, half of every payment deepens the PancakeSwap pool with burned LP.">
+<link rel="icon" href="/favicon.svg?v=1">
+<link rel="stylesheet" href="/style.css?v=1">
+</head>
+<body>
+<div class="strip"><span class="en">CONTRACTS LIVE AND VERIFIED · FOUNDER ROUND OPENS FIRST · PUBLIC SALE FOLLOWS</span><span class="zh">合约已上线并验证 · 创始人轮先行开启 · 随后公开销售</span></div>
+<header class="top"><div class="wrap top-in"><a class="logo" href="/"><svg width="34" height="34" viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M6 38c10 2 24-2 30-14 2-4 6-5 6-5s-1 5-3 9c8-3 11-10 12-16C42 16 34 22 26 25c-8 3-15 8-20 13z" fill="#ff7a1a"/><path d="M4 42c12 3 28 1 40-6" stroke="#19b8d6" stroke-width="3" stroke-linecap="round"/></svg>COINFIN</a><span class="langsw"><button id="swEn" onclick="setLang('en')">EN</button><button id="swZh" onclick="setLang('zh')">中文</button></span><nav class="main"><a href="/" class="on"><span class="en">Home</span><span class="zh">首页</span></a><a href="/whitepaper.html" class=""><span class="en">Whitepaper</span><span class="zh">白皮书</span></a><a href="/tokenomics.html" class=""><span class="en">Tokenomics</span><span class="zh">代币经济</span></a><a href="/docs.html" class=""><span class="en">Docs</span><span class="zh">文档</span></a></nav></div></header>
+
+<section class="hero"><div class="wrap">
+<h1><span class="en">One share. <span class="o">Daily harvest.</span></span><span class="zh">一份份额。<span class="o">每天收获。</span></span></h1>
+<p class="lede"><span class="en">CoinFin sells mining shares through your own agent. Each share harvests FIN every day, rewards halve epoch by epoch, and half of every payment flows into the PancakeSwap pool as burned liquidity. No second path, no staking, no lockups.</span><span class="zh">CoinFin 通过你自己的代理出售挖矿份额。每份份额每天收获 FIN，奖励按周期减半，每笔付款的一半以销毁的流动性形式流入 PancakeSwap 流动池。没有第二条路径，没有质押，没有锁仓。</span></p>
+<div class="cta"><a class="btn solid" href="#buy"><span class="en">Buy a share</span><span class="zh">购买份额</span></a><a class="btn ghost" href="#harvest"><span class="en">Harvest FIN</span><span class="zh">收获 FIN</span></a></div>
+<div class="board">
+<div class="cell"><div class="k"><span class="en">Shares sold</span><span class="zh">已售份额</span></div><div class="v" id="bShares">0</div></div>
+<div class="cell"><div class="k"><span class="en">Epoch</span><span class="zh">当前周期</span></div><div class="v" id="bEpoch">1 <span style="font-size:.45em">of 11</span></div></div>
+<div class="cell"><div class="k"><span class="en">FIN per unit</span><span class="zh">每单位 FIN</span></div><div class="v" id="bPer">10,000</div></div>
+<div class="cell"><div class="k"><span class="en">Units claimed</span><span class="zh">已领取单位</span></div><div class="v" id="bClaims">0</div><div class="bar"><i id="bBar"></i></div></div>
+</div>
+<div class="facts" style="margin-top:14px"><div><span><span class="en">FIN price (pool)</span><span class="zh">FIN 价格（流动池）</span></span><b id="bPrice">pool opens at launch</b></div><div><span><span class="en">Pool liquidity</span><span class="zh">流动池深度</span></span><b id="bLiq">0 BNB</b></div><div><span><span class="en">Liquidity reserve waiting</span><span class="zh">等待注入的流动储备</span></span><b id="bReserve">0 BNB</b></div></div>
+</div><svg class="finart" width="420" height="300" viewBox="0 0 420 300" fill="none" aria-hidden="true"><path d="M30 260c90 20 220-10 290-110 20-28 55-40 55-40s-5 40-25 70c60-20 85-70 95-120C390 75 320 130 240 160c-90 34-165 70-210 100z" fill="#ff7a1a" opacity=".16"/><path d="M10 285c110 25 280 5 400-55" stroke="#19b8d6" stroke-width="4" stroke-linecap="round" opacity=".35"/></svg></section>
+
+<section class="blk alt" id="presale"><div class="wrap">
+<div class="tag"><span class="en">01 · Founder Round presale</span><span class="zh">01 · 创始人轮预售</span></div>
+<h2><span class="en">First 5,000 shares carry the founder mark</span><span class="zh">前 5,000 份份额带有创始人标记</span></h2>
+<p class="sub"><span class="en">The first 5,000 shares sold are presale positions, flagged on-chain forever. Same $0.20 price, same 50 per wallet cap, one difference that never goes away: founder positions harvest 25% more, every day, for as long as the mine runs. During the Founder Round the split runs 70% project and 30% pool, published here in the open; public sale returns to 50/50.</span><span class="zh">售出的前 5,000 份份额是预售仓位，在链上被永久标记。同样 0.20 美元的价格，同样每钱包 50 份的上限，只有一个永不消失的区别：创始人仓位每天多收获 25%，只要矿场还在运行。创始人轮期间分配为 70% 项目方、30% 流动池，在此公开发布；公开销售恢复 50/50。</span></p>
+<div class="cols2">
+<div class="facts">
+<div><span><span class="en">Founder shares sold</span><span class="zh">已售创始人份额</span></span><b><span id="bPre">0</span> / 5,000</b></div>
+<div><span><span class="en">Harvest bonus</span><span class="zh">收获加成</span></span><b>+25% forever</b></div>
+<div><span><span class="en">Instant bonus</span><span class="zh">即时奖励</span></span><b>1,000 FIN per share</b></div>
+<div><span><span class="en">Founder Round split</span><span class="zh">创始人轮分配</span></span><b>70% project · 30% pool</b></div>
+<div><span><span class="en">Early access</span><span class="zh">提前入场</span></span><b><span class="en">Opens before public sale</span><span class="zh">在公开销售之前开启</span></b></div>
+</div>
+<div>
+<div class="split"><div class="rev" style="flex:7"><span class="en">70% → PROJECT (FOUNDER ROUND)</span><span class="zh">70% → 项目方（创始人轮）</span></div><div class="pool" style="flex:3"><span class="en">30% → POOL</span><span class="zh">30% → 流动池</span></div></div>
+<p style="margin-top:14px" class="sub"><span class="en">Founder buyers also receive 1,000 FIN per share from the project reserve after the round closes, sent to the presale wallets recorded on-chain. When the 5,000th share is gone, the round is gone: later positions harvest at the standard rate.</span><span class="zh">创始人买家在轮次结束后还将从项目储备中按每份 1,000 FIN 获得奖励，发送到链上记录的预售钱包。第 5,000 份售出后，轮次结束：之后的仓位按标准费率收获。</span></p>
+</div>
+</div>
+</div></section>
+
+<section class="blk" id="buy"><div class="wrap">
+<div class="tag"><span class="en">02 · Buy shares</span><span class="zh">02 · 购买份额</span></div>
+<h2><span class="en">A share is a position, not a picture</span><span class="zh">份额是一个仓位，不是一张图片</span></h2>
+<p class="sub"><span class="en">Tell your agent to buy. The agent checks your Binance Agent ID, pays the fixed price, and your position starts harvesting from that minute. Buy more later and a second position opens beside the first. Positions stay with your wallet and never expire.</span><span class="zh">让你的代理购买即可。代理会核查你的 Binance Agent ID，支付固定价格，你的仓位从那一分钟开始收获。以后再买，会在第一个仓位旁开启第二个仓位。仓位跟随钱包，永不过期。</span></p>
+<div class="cols2">
+<div class="facts">
+<div><span><span class="en">Price per share</span><span class="zh">每份价格</span></span><b>$0.20 in BNB</b></div>
+<div><span><span class="en">Max per wallet</span><span class="zh">每钱包上限</span></span><b>50 shares</b></div>
+<div><span><span class="en">Gate</span><span class="zh">门槛</span></span><b>Binance Agent ID</b></div>
+<div><span><span class="en">Payment split</span><span class="zh">付款分配</span></span><b>50% pool · 50% project</b></div>
+<div><span><span class="en">Where buying happens</span><span class="zh">购买方式</span></span><b><span class="en">Your agent only</span><span class="zh">仅经你的代理</span></b></div>
+</div>
+<div>
+<div class="split"><div class="pool"><span class="en">50% → POOL · LP BURNED</span><span class="zh">50% → 流动池 · LP 销毁</span></div><div class="rev"><span class="en">50% → PROJECT</span><span class="zh">50% → 项目方</span></div></div>
+<p style="margin-top:14px" class="sub"><span class="en">Half of your payment is swapped into FIN and paired as liquidity by the contract itself, and the LP tokens go straight to a dead address. Every buyer deepens the pool for everyone already holding.</span><span class="zh">你付款的一半由合约自动兑换为 FIN 并配对注入流动性，LP 代币直接发送到销毁地址。每一位新买家都在为所有持有人加深流动池。</span></p>
+<div class="prompt" style="margin-top:16px"><span class="k"><span class="en">Copy to your agent</span><span class="zh">复制给你的代理</span></span><span class="copied-note"><span class="en">COPIED</span><span class="zh">已复制</span></span><p><span class="en">Read https://coinfin.fun/coinfin-skill.md and follow it exactly to buy CoinFin shares for my wallet. Tell me the exact BNB cost first, then execute after my confirmation.</span><span class="zh">请阅读 https://coinfin.fun/coinfin-skill.md 并严格按照它为我的钱包购买 CoinFin 份额。先告诉我确切的 BNB 成本，待我确认后再执行。</span></p></div>
+</div>
+</div>
+</div></section>
+
+<section class="blk" id="harvest"><div class="wrap">
+<div class="tag"><span class="en">03 · Harvest</span><span class="zh">03 · 收获</span></div>
+<h2><span class="en">Every day adds up, claimed in one call</span><span class="zh">每天累积，一次领取</span></h2>
+<p class="sub"><span class="en">One unit is one share held for one day. Units stack while you wait, and one claim call collects everything at the rate of the current epoch. Claiming is free. Rewards halve after every 150,000 units claimed across the network, across 11 epochs, until the mine is empty.</span><span class="zh">一个单位等于一份份额持有一天。单位在你等待时不断累积，一次领取即可按当前周期费率收走全部。领取免费。全网每领取 150,000 个单位，奖励减半，共 11 个周期，直到矿场采完。</span></p>
+<div class="cols2">
+<div class="calc">
+<div class="k" style="font-family:'PlexMono',monospace;font-size:11.5px;letter-spacing:.1em;color:var(--fin2)"><span class="en">TRY THE MINE</span><span class="zh">试算矿场</span></div>
+<label><span class="en">Shares</span><span class="zh">份额</span> · <span id="cSharesV">10</span></label>
+<input type="range" id="cShares" min="1" max="50" value="10">
+<label><span class="en">Days held</span><span class="zh">持有天数</span> · <span id="cDaysV">30</span></label>
+<input type="range" id="cDays" min="1" max="365" value="30">
+<div class="out"><div class="k" style="font-family:'PlexMono',monospace;font-size:11.5px;letter-spacing:.1em;color:var(--ink-dim)"><span class="en">HARVEST AT TODAY'S RATE</span><span class="zh">按今日费率收获</span></div><div class="big" id="cOut">3,000,000 FIN</div><div class="sub" id="cNote" style="font-size:13.5px"></div></div>
+</div>
+<div>
+<div class="prompt"><span class="k"><span class="en">Copy to your agent</span><span class="zh">复制给你的代理</span></span><span class="copied-note"><span class="en">COPIED</span><span class="zh">已复制</span></span><p><span class="en">Read https://coinfin.fun/coinfin-skill.md and follow it exactly to harvest all my accumulated FIN from CoinFin now.</span><span class="zh">请阅读 https://coinfin.fun/coinfin-skill.md 并严格按照它立即领取我累积的全部 FIN。</span></p></div>
+<p style="margin-top:16px" class="sub"><span class="en">Rates and the full epoch table live on the </span><span class="zh">费率与完整周期表见</span><a href="/tokenomics.html"><span class="en">tokenomics page</span><span class="zh">代币经济页面</span></a><span class="en">. Read the </span><span class="zh">。阅读</span><a href="/whitepaper.html"><span class="en">whitepaper</span><span class="zh">白皮书</span></a><span class="en"> for how the pool engine and the split work on-chain.</span><span class="zh">了解流动池引擎与分配如何在链上运作。</span></p>
+</div>
+</div>
+</div></section>
+
+<footer><div class="wrap">
+<div class="cols">
+<div><h4>CoinFin</h4><p style="max-width:340px"><span class="en">Buy a share through your agent, harvest FIN every day, and watch every purchase deepen the pool. Half of every payment becomes permanent liquidity. LP is burned.</span><span class="zh">通过你的代理购买一份份额，每天收获 FIN，并见证每一次购买加深流动池。每笔付款的一半成为永久流动性，LP 已销毁。</span></p></div>
+<div><h4><span class="en">Read</span><span class="zh">阅读</span></h4><a href="/whitepaper.html"><span class="en">Whitepaper</span><span class="zh">白皮书</span></a><a href="/tokenomics.html"><span class="en">Tokenomics</span><span class="zh">代币经济</span></a><a href="/docs.html"><span class="en">Docs and FAQ</span><span class="zh">文档与常见问题</span></a><a href="/coinfin-skill.md"><span class="en">Agent skill file</span><span class="zh">代理技能文件</span></a></div>
+<div><h4><span class="en">Contracts</span><span class="zh">合约</span></h4><a href="https://bscscan.com/token/0xB4C9efA5f217a75f48F3f58508ca1D70Df0d8CF4"><span class="en">FIN token</span><span class="zh">FIN 代币</span></a><a href="https://bscscan.com/address/0x1557e5B3bC821e5128A92fB3A94aECf2AF90676e"><span class="en">Share sale + pool engine</span><span class="zh">份额销售 + 流动池引擎</span></a><a href="https://bscscan.com/address/0xdf18D0E158abf572ffe34D9276bf3B0c196319aB"><span class="en">Harvest contract</span><span class="zh">收获合约</span></a></div>
+</div>
+<p class="fine">COINFIN · COINFIN.FUN · BNB SMART CHAIN · <span class="en">BUYING AND HARVESTING RUN ONLY THROUGH YOUR OWN BINANCE AGENTIC WALLET AGENT · THIS SITE NEVER ASKS YOU TO CONNECT A WALLET</span><span class="zh">购买与收获只经由你自己的 BINANCE AGENTIC WALLET 代理进行 · 本站永不要求连接钱包</span></p>
+</div></footer>
+<script src="/lang.js?v=1"></script>
+<script src="/app.js?v=1"></script>
+</body>
+</html>
