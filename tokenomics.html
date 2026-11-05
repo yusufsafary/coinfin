@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tokenomics · CoinFin</title>
+<meta name="description" content="CoinFin: agent-only share mining on BNB Smart Chain. Buy a share, harvest FIN daily, half of every payment deepens the PancakeSwap pool with burned LP.">
+<link rel="icon" href="/favicon.svg?v=1">
+<link rel="stylesheet" href="/style.css?v=1">
+</head>
+<body>
+<div class="strip"><span class="en">COINFIN · SHARE MINING · EVERY BUYER DEEPENS THE POOL</span><span class="zh">COINFIN · 份额挖矿 · 每位买家都在加深流动池</span></div>
+<header class="top"><div class="wrap top-in"><a class="logo" href="/"><svg width="34" height="34" viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M6 38c10 2 24-2 30-14 2-4 6-5 6-5s-1 5-3 9c8-3 11-10 12-16C42 16 34 22 26 25c-8 3-15 8-20 13z" fill="#ff7a1a"/><path d="M4 42c12 3 28 1 40-6" stroke="#19b8d6" stroke-width="3" stroke-linecap="round"/></svg>COINFIN</a><span class="langsw"><button id="swEn" onclick="setLang('en')">EN</button><button id="swZh" onclick="setLang('zh')">中文</button></span><nav class="main"><a href="/" class=""><span class="en">Home</span><span class="zh">首页</span></a><a href="/whitepaper.html" class=""><span class="en">Whitepaper</span><span class="zh">白皮书</span></a><a href="/tokenomics.html" class="on"><span class="en">Tokenomics</span><span class="zh">代币经济</span></a><a href="/docs.html" class=""><span class="en">Docs</span><span class="zh">文档</span></a></nav></div></header>
+
+<section class="blk"><div class="wrap">
+<div class="tag"><span class="en">Tokenomics</span><span class="zh">代币经济</span></div>
+<h2><span class="en">FIN: 5,000,000,000, fixed forever</span><span class="zh">FIN：5,000,000,000，永远固定</span></h2>
+<p class="sub"><span class="en">The full supply was minted once, to the project wallet, in the token contract constructor. There is no further mint and no burn function in the token. Allocation below is the project's published commitment; the mining share sits in the harvest contract before claims open, and the initial pool share pairs with the launch seed.</span><span class="zh">全部供应在代币合约构造时一次性铸造到项目钱包。代币没有后续铸造，也没有销毁函数。以下分配是项目公开的承诺；挖矿部分在领取开启前存放在收获合约，初始流动池部分与上线种子配对。</span></p>
+<div class="alloc">
+<div class="row"><span><span class="en">Mining reserve</span><span class="zh">挖矿储备</span></span><span class="track"><i style="width:60%;background:#19b8d6"></i></span><span class="amt">3,000,000,000</span></div>
+<div class="row"><span><span class="en">Initial pool</span><span class="zh">初始流动池</span></span><span class="track"><i style="width:20%;background:#ff7a1a"></i></span><span class="amt">1,000,000,000</span></div>
+<div class="row"><span><span class="en">Liquidity support</span><span class="zh">流动性支持</span></span><span class="track"><i style="width:10%;background:#ffb03a"></i></span><span class="amt">500,000,000</span></div>
+<div class="row"><span><span class="en">Project reserve</span><span class="zh">项目储备</span></span><span class="track"><i style="width:10%;background:#8fb0bf"></i></span><span class="amt">500,000,000</span></div>
+</div>
+<h3 style="margin-top:38px;font-size:22px"><span class="en">Emission schedule</span><span class="zh">发行时间表</span></h3>
+<p class="sub" style="margin-top:8px"><span class="en">One unit is one share held for one day. Paying 150,000 units closes an epoch and halves the next rate. Scheduled emission totals 2,998,200,000 FIN, which fits inside the mining reserve with room to spare.</span><span class="zh">一个单位等于一份份额持有一天。支付满 150,000 个单位关闭一个周期，下一个费率减半。计划总发行 2,998,200,000 FIN，完全装入挖矿储备并有余量。</span></p>
+<div class="schedwrap"><table class="sched"><thead><tr><th><span class="en">Epoch</span><span class="zh">周期</span></th><th class="n"><span class="en">Network units</span><span class="zh">全网单位</span></th><th class="n"><span class="en">FIN per unit</span><span class="zh">每单位 FIN</span></th></tr></thead><tbody><tr data-epoch="1"><td>1</td><td class="n">0 to 149,999</td><td class="n">10,000</td></tr><tr data-epoch="2"><td>2</td><td class="n">150,000 to 299,999</td><td class="n">5,000</td></tr><tr data-epoch="3"><td>3</td><td class="n">300,000 to 449,999</td><td class="n">2,500</td></tr><tr data-epoch="4"><td>4</td><td class="n">450,000 to 599,999</td><td class="n">1,250</td></tr><tr data-epoch="5"><td>5</td><td class="n">600,000 to 749,999</td><td class="n">625</td></tr><tr data-epoch="6"><td>6</td><td class="n">750,000 to 899,999</td><td class="n">312</td></tr><tr data-epoch="7"><td>7</td><td class="n">900,000 to 1,049,999</td><td class="n">156</td></tr><tr data-epoch="8"><td>8</td><td class="n">1,050,000 to 1,199,999</td><td class="n">78</td></tr><tr data-epoch="9"><td>9</td><td class="n">1,200,000 to 1,349,999</td><td class="n">39</td></tr><tr data-epoch="10"><td>10</td><td class="n">1,350,000 to 1,499,999</td><td class="n">19</td></tr><tr data-epoch="11"><td>11</td><td class="n">1,500,000 to 1,649,999</td><td class="n">9</td></tr></tbody></table></div>
+<h3 style="margin-top:38px;font-size:22px"><span class="en">Share economics</span><span class="zh">份额经济</span></h3>
+<p class="sub" style="margin-top:8px"><span class="en">A share costs $0.20 in BNB. Half deepens the pool as burned LP, half is project revenue. There is no claim fee, no trade tax in the token contract, and no staking. The only ongoing cost of the system is the halving itself: late units are worth less than early ones, by design.</span><span class="zh">一份份额价格为 0.20 美元等值 BNB。一半以销毁 LP 的形式加深流动池，一半是项目收入。没有领取费，代币合约没有交易税，没有质押。系统唯一的持续成本就是减半本身：按设计，后期的单位价值低于早期。</span></p>
+</div></section>
+
+<footer><div class="wrap">
+<div class="cols">
+<div><h4>CoinFin</h4><p style="max-width:340px"><span class="en">Buy a share through your agent, harvest FIN every day, and watch every purchase deepen the pool. Half of every payment becomes permanent liquidity. LP is burned.</span><span class="zh">通过你的代理购买一份份额，每天收获 FIN，并见证每一次购买加深流动池。每笔付款的一半成为永久流动性，LP 已销毁。</span></p></div>
+<div><h4><span class="en">Read</span><span class="zh">阅读</span></h4><a href="/whitepaper.html"><span class="en">Whitepaper</span><span class="zh">白皮书</span></a><a href="/tokenomics.html"><span class="en">Tokenomics</span><span class="zh">代币经济</span></a><a href="/docs.html"><span class="en">Docs and FAQ</span><span class="zh">文档与常见问题</span></a><a href="/coinfin-skill.md"><span class="en">Agent skill file</span><span class="zh">代理技能文件</span></a></div>
+<div><h4><span class="en">Contracts</span><span class="zh">合约</span></h4><a href="https://bscscan.com/token/0xB4C9efA5f217a75f48F3f58508ca1D70Df0d8CF4"><span class="en">FIN token</span><span class="zh">FIN 代币</span></a><a href="https://bscscan.com/address/0x1557e5B3bC821e5128A92fB3A94aECf2AF90676e"><span class="en">Share sale + pool engine</span><span class="zh">份额销售 + 流动池引擎</span></a><a href="https://bscscan.com/address/0xdf18D0E158abf572ffe34D9276bf3B0c196319aB"><span class="en">Harvest contract</span><span class="zh">收获合约</span></a></div>
+</div>
+<p class="fine">COINFIN · COINFIN.FUN · BNB SMART CHAIN · <span class="en">BUYING AND HARVESTING RUN ONLY THROUGH YOUR OWN BINANCE AGENTIC WALLET AGENT · THIS SITE NEVER ASKS YOU TO CONNECT A WALLET</span><span class="zh">购买与收获只经由你自己的 BINANCE AGENTIC WALLET 代理进行 · 本站永不要求连接钱包</span></p>
+</div></footer>
+<script src="/lang.js?v=1"></script>
+<script src="/app.js?v=1"></script>
+</body>
+</html>
