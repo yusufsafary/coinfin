@@ -1,54 +1,120 @@
 <!DOCTYPE html>
 <html lang="en" data-lang="en">
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Docs · CoinFin</title>
-<meta name="description" content="CoinFin: agent-only share mining on BNB Smart Chain. Buy a share, harvest FIN daily, half of every payment deepens the PancakeSwap pool with burned LP.">
-<link rel="icon" href="/favicon.svg?v=1">
-<link rel="stylesheet" href="/style.css?v=1">
+<title>Docs · CoinFin Curve</title>
+<meta name="description" content="CoinFin Curve mechanics: gates, Pass tiers, curve rules, seasons, dividends, FIN claim and the agent read interface.">
+<link rel="icon" href="img/favicon.svg?v=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css?v=1">
+<script src="js/config.js?v=1"></script>
+<script src="js/read.js?v=1"></script>
+<script src="js/lang.js?v=1"></script>
 </head>
 <body>
-<div class="strip"><span class="en">COINFIN · SHARE MINING · EVERY BUYER DEEPENS THE POOL</span><span class="zh">COINFIN · 份额挖矿 · 每位买家都在加深流动池</span></div>
-<header class="top"><div class="wrap top-in"><a class="logo" href="/"><svg width="34" height="34" viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M6 38c10 2 24-2 30-14 2-4 6-5 6-5s-1 5-3 9c8-3 11-10 12-16C42 16 34 22 26 25c-8 3-15 8-20 13z" fill="#ff7a1a"/><path d="M4 42c12 3 28 1 40-6" stroke="#19b8d6" stroke-width="3" stroke-linecap="round"/></svg>COINFIN</a><span class="langsw"><button id="swEn" onclick="setLang('en')">EN</button><button id="swZh" onclick="setLang('zh')">中文</button></span><nav class="main"><a href="/" class=""><span class="en">Home</span><span class="zh">首页</span></a><a href="/whitepaper.html" class=""><span class="en">Whitepaper</span><span class="zh">白皮书</span></a><a href="/tokenomics.html" class=""><span class="en">Tokenomics</span><span class="zh">代币经济</span></a><a href="/docs.html" class="on"><span class="en">Docs</span><span class="zh">文档</span></a></nav></div></header>
+<header class="top"><div class="wrap top-in">
+<a class="brand" href="index.html"><img src="img/logo.svg?v=1" alt="CoinFin Curve"><span>COINFIN<span class="sub">CURVE</span></span></a>
+<nav class="main"><a href="index.html"><span class="en">Home</span><span class="zh">首页</span></a><a href="tokenomics.html"><span class="en">Tokenomics</span><span class="zh">代币经济</span></a><a href="whitepaper.html"><span class="en">Whitepaper</span><span class="zh">白皮书</span></a><a href="docs.html" class="on"><span class="en">Docs</span><span class="zh">文档</span></a><a href="swap.html"><span class="en">Swap</span><span class="zh">兑换</span></a><a href="about.html"><span class="en">About</span><span class="zh">关于</span></a></nav>
+<span class="langsw"><button id="swEn" onclick="setLang('en')">EN</button><button id="swZh" onclick="setLang('zh')">中文</button></span>
+</div></header>
 
-<section class="blk"><div class="wrap prose">
-<div class="tag"><span class="en">Docs</span><span class="zh">文档</span></div>
-<h2><span class="en">How CoinFin works, step by step</span><span class="zh">CoinFin 如何运作，一步一步</span></h2>
-<h3><span class="en">Buying shares</span><span class="zh">购买份额</span></h3>
-<ul>
-<li><span class="en">You need a Binance Agentic Wallet agent and a Binance Agent ID in the same wallet. Without an Agent ID, the contract rejects the purchase.</span><span class="zh">你需要一个 Binance Agentic Wallet 代理，并且同一钱包中持有 Binance Agent ID。没有 Agent ID，合约会拒绝购买。</span></li>
-<li><span class="en">Copy the buy prompt from the homepage, or point your agent at the skill file: </span><span class="zh">复制首页的购买提示，或让你的代理读取技能文件：</span><span class="addr">https://coinfin.fun/coinfin-skill.md</span></li>
-<li><span class="en">Your agent quotes the exact BNB cost (shares times $0.20 in BNB, locked in the contract) and executes only after your confirmation in the Binance app flow.</span><span class="zh">你的代理会报出确切的 BNB 成本（份数乘以合约锁定的 0.20 美元等值），并在你确认后才执行。</span></li>
-<li><span class="en">Each purchase opens a position. Positions from separate purchases harvest independently and are all collected by one claim call.</span><span class="zh">每次购买开启一个仓位。不同购买的仓位独立收获，由一次领取统一收走。</span></li>
-</ul>
-<h3><span class="en">Harvesting</span><span class="zh">收获</span></h3>
-<ul>
-<li><span class="en">A position earns one unit per share per full day since purchase. Partial days do not count yet, and unclaimed days never expire.</span><span class="zh">仓位自购买起，每个完整日每份产生一个单位。不足一天的部分暂不计，未领取的天数永不过期。</span></li>
-<li><span class="en">Ask your agent to harvest. It reads your accumulated units, claims them all in one transaction, and FIN lands in your wallet. Claiming costs no fee, only network gas paid by your wallet.</span><span class="zh">让你的代理收获。它会读取你累积的单位，在一笔交易中全部领取，FIN 进入你的钱包。领取不收费，只需钱包支付网络 gas。</span></li>
-<li><span class="en">Rates halve as the network claims. Claiming earlier in an epoch pays the higher rate for every unit inside it.</span><span class="zh">费率随全网领取量减半。在周期内越早领取，该周期内的每个单位都按更高费率支付。</span></li>
-</ul>
-<h3><span class="en">FAQ</span><span class="zh">常见问题</span></h3>
-<p><b><span class="en">What is the Founder Round?</span><span class="zh">什么是创始人轮？</span></b><br><span class="en">A presale for the first 5,000 shares. Founder positions harvest 25% more units per day forever, receive 1,000 FIN per share after the round closes, and are marked on the site board. The round split is 70% project and 30% pool; public sale after the round is 50/50. The counter on the homepage is read live from the contract.</span><span class="zh">前 5,000 份份额的预售。创始人仓位每天多收获 25% 单位，永久有效，轮次结束后按每份获得 1,000 FIN，并在网站看板上标记。轮次分配为 70% 项目方、30% 流动池；轮次之后的公开销售为 50/50。首页计数器从合约实时读取。</span></p>
-<p><b><span class="en">Can I sell or transfer my shares?</span><span class="zh">我可以出售或转让份额吗？</span></b><br><span class="en">Positions are bound to the wallet that bought them and cannot be transferred. FIN itself is a normal token and trades freely on PancakeSwap once the pool is live.</span><span class="zh">仓位绑定购买钱包，不可转让。FIN 本身是普通代币，流动池上线后可在 PancakeSwap 自由交易。</span></p>
-<p><b><span class="en">What happens before the pool is seeded?</span><span class="zh">流动池注入之前会怎样？</span></b><br><span class="en">The liquidity half of every payment waits in the contract reserve, visible to everyone through a public getter. The engine starts processing automatically as soon as the pair exists. No reserve funds can be withdrawn by the owner.</span><span class="zh">每笔付款的流动性一半会留在合约储备中，任何人都能通过公开读取函数查看。交易对一旦存在，引擎自动开始处理。所有者无法提取储备资金。</span></p>
-<p><b><span class="en">Why does the price move when people buy shares?</span><span class="zh">为什么有人买份额时价格会动？</span></b><br><span class="en">Because the pool engine spends half of every payment inside the pool: it buys FIN with one quarter of the payment and pairs another quarter as new liquidity. New demand literally walks the price up and deepens the pool at the same time.</span><span class="zh">因为流动池引擎把每笔付款的一半花在池子里：用四分之一购买 FIN，再用四分之一配对为新流动性。新需求实实在在地推高价格，同时加深流动池。</span></p>
-<p><b><span class="en">Is this site a trading interface?</span><span class="zh">这个网站是交易界面吗？</span></b><br><span class="en">No. This site only publishes information, live counters read from the contracts, and the agent skill file. It never asks you to connect a wallet, and buying or claiming happens only through your own agent.</span><span class="zh">不是。本站只发布信息、从合约读取的实时计数以及代理技能文件。它从不要求连接钱包，购买与领取只经由你自己的代理。</span></p>
-<h3><span class="en">Contracts of record</span><span class="zh">官方合约</span></h3>
-<p><span class="en">FIN token</span><span class="zh">FIN 代币</span><br><span class="addr">0xB4C9efA5f217a75f48F3f58508ca1D70Df0d8CF4</span></p>
-<p><span class="en">Share sale and pool engine</span><span class="zh">份额销售与流动池引擎</span><br><span class="addr">0x1557e5B3bC821e5128A92fB3A94aECf2AF90676e</span></p>
-<p><span class="en">Harvest</span><span class="zh">收获合约</span><br><span class="addr">0xdf18D0E158abf572ffe34D9276bf3B0c196319aB</span></p>
-</div></section>
+<div class="wrap">
+<section class="page-head">
+  <p class="kicker"><span class="en">Docs</span><span class="zh">文档</span></p>
+  <h1><span class="en">Mechanics, <em>exactly.</em></span><span class="zh">机制,<em>精确版。</em></span></h1>
+  <p class="lede"><span class="en">Everything an agent or a developer needs to act on CoinFin Curve. Live actions go through the Binance Agentic Wallet using the skill file; this site is read-only.</span><span class="zh">代理或开发者在 CoinFin Curve 上行动所需的一切。实际操作通过币安 Agentic Wallet 使用技能文件完成;本站只读。</span></p>
+</section>
 
-<footer><div class="wrap">
-<div class="cols">
-<div><h4>CoinFin</h4><p style="max-width:340px"><span class="en">Buy a share through your agent, harvest FIN every day, and watch every purchase deepen the pool. Half of every payment becomes permanent liquidity. LP is burned.</span><span class="zh">通过你的代理购买一份份额，每天收获 FIN，并见证每一次购买加深流动池。每笔付款的一半成为永久流动性，LP 已销毁。</span></p><a href="https://x.com/coinfinfun" style="margin-top:12px;color:var(--fin2);font-weight:600">X · @coinfinfun</a></div>
-<div><h4><span class="en">Read</span><span class="zh">阅读</span></h4><a href="/whitepaper.html"><span class="en">Whitepaper</span><span class="zh">白皮书</span></a><a href="/tokenomics.html"><span class="en">Tokenomics</span><span class="zh">代币经济</span></a><a href="/docs.html"><span class="en">Docs and FAQ</span><span class="zh">文档与常见问题</span></a><a href="/coinfin-skill.md"><span class="en">Agent skill file</span><span class="zh">代理技能文件</span></a></div>
-<div><h4><span class="en">Contracts</span><span class="zh">合约</span></h4><a href="https://bscscan.com/token/0xB4C9efA5f217a75f48F3f58508ca1D70Df0d8CF4"><span class="en">FIN token</span><span class="zh">FIN 代币</span></a><a href="https://bscscan.com/address/0x1557e5B3bC821e5128A92fB3A94aECf2AF90676e"><span class="en">Share sale + pool engine</span><span class="zh">份额销售 + 流动池引擎</span></a><a href="https://bscscan.com/address/0xdf18D0E158abf572ffe34D9276bf3B0c196319aB"><span class="en">Harvest contract</span><span class="zh">收获合约</span></a></div>
+<section class="blk">
+  <div class="sec-head"><span class="sec-no">01</span><h2 class="sec"><span class="en">Access and the <em>question gate</em></span><span class="zh">访问与<em>问题门槛</em></span></h2></div>
+  <p class="sec-sub"><span class="en">Curve buys before graduation and the free Pass mint require a Binance Agent ID (SPACE ID registry, ERC-721). The free mint also requires answering the contract's rotating knowledge question: fetch questionFor(yourAddress), compute the answer with salt COINFIN-Q as described in the skill file, and submit it with the mint call. Contract and human (tx.origin) checks apply on every gated lane.</span><span class="zh">毕业前的曲线买入和免费 Pass 铸造都要求币安 Agent ID(SPACE ID 注册表,ERC-721)。免费铸造还需回答合约轮换的知识问题:获取 questionFor(你的地址),按技能文件说明用盐 COINFIN-Q 计算答案,随铸造调用一并提交。所有受门槛通道都执行合约与真人(tx.origin)检查。</span></p>
+</section>
+
+<section class="blk">
+  <div class="sec-head"><span class="sec-no">02</span><h2 class="sec"><span class="en">Pass mint <em>tiers</em></span><span class="zh">Pass 铸造<em>阶梯</em></span></h2></div>
+  <table class="spec">
+    <tr><th><span class="en">Mint nº per wallet</span><span class="zh">每钱包第几次铸造</span></th><th><span class="en">Price</span><span class="zh">价格</span></th><th><span class="en">Lane</span><span class="zh">通道</span></th></tr>
+    <tr><td>1</td><td>FREE</td><td>mintFree · Agent ID + question</td></tr>
+    <tr><td>2 to 5</td><td>0.0002 BNB</td><td>mintPaid</td></tr>
+    <tr><td>6 to 10</td><td>0.0004 BNB</td><td>mintPaid</td></tr>
+    <tr><td>11 to 20</td><td>0.0008 BNB</td><td>mintPaid · hard cap 20 per wallet</td></tr>
+  </table>
+  <p class="sec-sub" style="margin-top:12px"><span class="en">Paid mint proceeds go to the project wallet in the same transaction. Supply is capped at 10,000; when it sells out, minting closes for good.</span><span class="zh">付费铸造的收入在同一笔交易中进入项目钱包。供应上限 10,000;售罄后铸造永久关闭。</span></p>
+</section>
+
+<section class="blk">
+  <div class="sec-head"><span class="sec-no">03</span><h2 class="sec"><span class="en">Buying and selling a <em>curve</em></span><span class="zh">买卖<em>曲线</em></span></h2></div>
+  <table class="spec">
+    <tr><th><span class="en">Rule</span><span class="zh">规则</span></th><th><span class="en">Value</span><span class="zh">数值</span></th></tr>
+    <tr><td><span class="en">Who can buy pre-graduation</span><span class="zh">毕业前谁能买</span></td><td><span class="en">Binance Agent ID holders only</span><span class="zh">仅限币安 Agent ID 持有者</span></td></tr>
+    <tr><td><span class="en">Holdings cap per wallet</span><span class="zh">每钱包持有上限</span></td><td>1% <span class="en">of launch supply</span><span class="zh">发行供应量</span></td></tr>
+    <tr><td><span class="en">Holdings cap with a Pass</span><span class="zh">持有 Pass 的上限</span></td><td>2% <span class="en">of launch supply</span><span class="zh">发行供应量</span></td></tr>
+    <tr><td><span class="en">Trade tax (buy and sell)</span><span class="zh">交易税(买入与卖出)</span></td><td>5% · 2 creator / 2 platform / 1 Pass vault</td></tr>
+    <tr><td><span class="en">Sells pre-graduation</span><span class="zh">毕业前卖出</span></td><td><span class="en">Back into the curve reserve at curve price, tax applies</span><span class="zh">按曲线价格卖回储备,需缴税</span></td></tr>
+    <tr><td><span class="en">Graduation</span><span class="zh">毕业</span></td><td>8 BNB <span class="en">real reserve → PancakeSwap V2 pool, LP burned</span><span class="zh">真实储备 → PancakeSwap V2 池,LP 烧毁</span></td></tr>
+    <tr><td><span class="en">Launch fee (creator)</span><span class="zh">发行费(创建者)</span></td><td>0.05 BNB</td></tr>
+  </table>
+</section>
+
+<section class="blk">
+  <div class="sec-head"><span class="sec-no">04</span><h2 class="sec"><span class="en">Seasons, dividends, <em>FIN claim</em></span><span class="zh">季度、分红与 <em>FIN 领取</em></span></h2></div>
+  <p class="sec-sub"><span class="en">A season is 14 days. The dividend vault collects 1% of every curve trade during the season. At season close the vault balance is divided by the number of minted Passes; each Pass can claim one share for that season, once, and the claim follows the current holder. The FIN claim is separate: 250,000 FIN per Pass, once per Pass, open while the claim pool lasts. Claiming never burns the Pass.</span><span class="zh">一季为 14 天。分红金库在季度内收集每笔曲线交易的 1%。季度结束时,金库余额除以已铸造的 Pass 数量;每张 Pass 可领取该季一份,一次为限,领取跟随当前持有者。FIN 领取独立计算:每个 Pass 250,000 FIN,每 Pass 一次,领取池存续期间开放。领取不会烧毁 Pass。</span></p>
+</section>
+
+<section class="blk">
+  <div class="sec-head"><span class="sec-no">05</span><h2 class="sec"><span class="en">Read interface for <em>agents</em></span><span class="zh">供<em>代理</em>使用的读取接口</span></h2></div>
+  <p class="sec-sub"><span class="en">Read-only calls the site itself uses, so agents can mirror the board. Write flows (mintFree, mintPaid, buy, sell, claim) are specified in the skill file with preview-first signing through the Binance Agentic Wallet CLI.</span><span class="zh">本站自身使用的只读调用,代理可据此镜像展示板。写入流程(mintFree、mintPaid、buy、sell、claim)在技能文件中说明,通过币安 Agentic Wallet CLI 先预览再签名。</span></p>
+  <table class="spec">
+    <tr><th><span class="en">Call</span><span class="zh">调用</span></th><th>Selector</th><th><span class="en">Returns</span><span class="zh">返回</span></th></tr>
+    <tr><td>factory.launchesCount()</td><td>0x63d0053d</td><td>uint256 launches created</td></tr>
+    <tr><td>factory.launchInfo(uint256)</td><td>0x6aef1576</td><td>token, creator, real reserve, token reserve, graduated, pair, created at</td></tr>
+            <tr><td>pass.totalMinted()</td><td>0xa2309ff8</td><td>uint256</td></tr>
+    <tr><td>pass.ownerOf(uint256)</td><td>0x6352211e</td><td>address</td></tr>
+    <tr><td>claim.claimedById(uint256)</td><td>0x4c80ee12</td><td>bool, FIN already claimed for a Pass</td></tr>
+    <tr><td>claim.claimOpen()</td><td>0x4b8bcb58</td><td>bool</td></tr>
+    <tr><td>vault.currentSeason()</td><td>0xbcb39621</td><td>uint256</td></tr>
+    <tr><td>vault.dividendFor(uint256,uint256)</td><td>0x214fbed7</td><td>uint256 wei for (passId, season)</td></tr>
+    <tr><td>token.name() / symbol() / totalSupply()</td><td>0x06fdde03 / 0x95d89b41 / 0x18160ddd</td><td>string / string / uint256</td></tr>
+  </table>
+  <div class="note"><b><span class="en">Addresses.</span><span class="zh">地址。</span></b> <span class="en">FIN is live at </span><span class="zh">FIN 已上线:</span>0xB4C9efA5f217a75f48F3f58508ca1D70Df0d8CF4<span class="en">. Pass, factory, vault and claim are deployed and verified; their addresses are in the footer below and in js/config.js. Pass mint, dividend seasons and the FIN claim open on a separate announcement.</span><span class="zh">。Pass、工厂、金库和领取合约均已部署并通过验证;地址见下方页脚和 js/config.js。Pass 铸造、分红季和 FIN 领取将在另行公告后开放。</span></div>
+  <div class="btnrow"><a class="btn" href="coinfin-skill.md"><span class="en">Open the skill file</span><span class="zh">打开技能文件</span></a></div>
+</section>
+<div class="rule"></div>
 </div>
-<p class="fine">COINFIN · COINFIN.FUN · BNB SMART CHAIN · <span class="en">BUYING AND HARVESTING RUN ONLY THROUGH YOUR OWN BINANCE AGENTIC WALLET AGENT · THIS SITE NEVER ASKS YOU TO CONNECT A WALLET</span><span class="zh">购买与收获只经由你自己的 BINANCE AGENTIC WALLET 代理进行 · 本站永不要求连接钱包</span></p>
+
+<footer class="site"><div class="wrap">
+<div class="foot-in">
+<div>
+<a class="brand" href="index.html"><img src="img/logo.svg?v=1" alt="CoinFin Curve"><span>COINFIN<span class="sub">CURVE</span></span></a>
+<p class="muted" style="margin-top:12px;font-size:14px"><span class="en">Bonding curve launches gated by Binance Agent ID, with a Pass that collects.</span><span class="zh">由币安 Agent ID 把关的联合曲线发行,配一张会分红的 Pass。</span></p>
+</div>
+<div><h4><span class="en">Project</span><span class="zh">项目</span></h4>
+<a href="index.html"><span class="en">Home</span><span class="zh">首页</span></a>
+<a href="tokenomics.html"><span class="en">Tokenomics</span><span class="zh">代币经济</span></a>
+<a href="whitepaper.html"><span class="en">Whitepaper</span><span class="zh">白皮书</span></a>
+<a href="docs.html"><span class="en">Docs</span><span class="zh">文档</span></a>
+<a href="swap.html"><span class="en">Swap</span><span class="zh">兑换</span></a></div>
+<div><h4><span class="en">Legal</span><span class="zh">法律</span></h4>
+<a href="about.html"><span class="en">About</span><span class="zh">关于</span></a>
+<a href="terms.html"><span class="en">Terms of Use</span><span class="zh">使用条款</span></a>
+<a href="privacy.html"><span class="en">Privacy Policy</span><span class="zh">隐私政策</span></a>
+<a href="disclaimer.html"><span class="en">Disclaimer</span><span class="zh">免责声明</span></a></div>
+<div><h4><span class="en">Contracts</span><span class="zh">合约</span></h4>
+<div class="addr"><b>FIN TOKEN</b><a href="https://bscscan.com/token/0xB4C9efA5f217a75f48F3f58508ca1D70Df0d8CF4">0xB4C9efA5f217a75f48F3f58508ca1D70Df0d8CF4</a></div>
+<div class="addr"><b>PASS NFT</b><a href="https://bscscan.com/address/0x5877D2bb9F226cC3E438F4d656cAeb27DEAFC576">0x5877D2bb9F226cC3E438F4d656cAeb27DEAFC576</a></div>
+<div class="addr"><b>CURVE FACTORY</b><a href="https://bscscan.com/address/0x5d495321e02E63A9D277dE55938A5406b0f72c52">0x5d495321e02E63A9D277dE55938A5406b0f72c52</a></div>
+<div class="addr"><b>DIVIDEND VAULT</b><a href="https://bscscan.com/address/0xF6414e89B55cc32D5E3AB9754526344D970BA4E5">0xF6414e89B55cc32D5E3AB9754526344D970BA4E5</a></div>
+<div class="addr"><b>FIN CLAIM</b><a href="https://bscscan.com/address/0x736B903C8d86Fa2F139032A27c702FC7269Cfa33">0x736B903C8d86Fa2F139032A27c702FC7269Cfa33</a></div>
+<div class="addr"><b>PROJECT WALLET</b><a href="https://bscscan.com/address/0xAA7620954c1f61292d02275e7F147E47E62fa068">0xAA7620954c1f61292d02275e7F147E47E62fa068</a></div>
+</div>
+</div>
+<div class="foot-base"><span>COINFIN CURVE · BNB CHAIN · CHAIN ID 56</span><span>coinfin.fun</span></div>
 </div></footer>
-<script src="/lang.js?v=1"></script>
-<script src="/app.js?v=1"></script>
+<script src="js/app.js?v=1"></script>
+<script>setLang(document.documentElement.getAttribute("data-lang") || "en");</script>
+
 </body>
 </html>
