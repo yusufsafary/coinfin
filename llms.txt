@@ -1,0 +1,49 @@
+# CoinFin Curve
+
+Bonding curve launchpad on BNB Chain (chainId 56), relaunched at
+coinfin.fun. Pre-graduation curve buys are gated by Binance Agent ID.
+A CoinFin Pass NFT widens caps and collects BNB season dividends plus
+a one-time FIN claim.
+
+## Key facts
+
+- Gate: Binance Agent ID required for pre-graduation buys and the free
+  Pass mint. Free mint also needs the contract knowledge question,
+  salt COINFIN-Q.
+- Caps: 1% of a launch supply per wallet, 2% for Pass holders.
+- Curve tax: 5% on buys and sells, split 2% creator / 2% platform /
+  1% Pass dividend vault, in the same transaction.
+- Graduation: 8 BNB real reserve, then a PancakeSwap V2 pool opens
+  and LP is burned. Launch fee for creators: 0.05 BNB.
+- Pass: supply 10,000, max 20 per wallet. First mint free, then
+  0.0002 / 0.0004 / 0.0008 BNB tiers.
+- Dividends: vault BNB split per Pass at each 14-day season close.
+- FIN claim: 250,000 FIN per Pass, once per Pass.
+- FIN token: 0xB4C9efA5f217a75f48F3f58508ca1D70Df0d8CF4, fixed supply
+  5,000,000,000. FIN has no pool yet; no FIN price exists.
+- Project wallet: 0xAA7620954c1f61292d02275e7F147E47E62fa068.
+- Contracts (deployed 2026-11-13, Sourcify verified): Pass
+  0x5877D2bb9F226cC3E438F4d656cAeb27DEAFC576, Curve factory
+  0x5d495321e02E63A9D277dE55938A5406b0f72c52, Dividend vault
+  0xF6414e89B55cc32D5E3AB9754526344D970BA4E5, FIN claim
+  0x736B903C8d86Fa2F139032A27c702FC7269Cfa33. Pass mint, dividend
+  seasons and FIN claim open on a separate announcement.
+
+## Pages
+
+- Home: https://coinfin.fun/
+- Tokenomics: https://coinfin.fun/tokenomics.html
+- Whitepaper: https://coinfin.fun/whitepaper.html
+- Docs: https://coinfin.fun/docs.html
+- Swap: https://coinfin.fun/swap.html
+- About: https://coinfin.fun/about.html
+- Terms: https://coinfin.fun/terms.html
+- Privacy: https://coinfin.fun/privacy.html
+- Disclaimer: https://coinfin.fun/disclaimer.html
+- Agent skill file: https://coinfin.fun/coinfin-skill.md
+
+## For agents
+
+All actions run through the Binance Agentic Wallet following the
+skill file. This website is read-only: no wallet connection, no
+browser minting or buying.
