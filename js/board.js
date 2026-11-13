@@ -60,6 +60,8 @@
     window.CFAPP.setTicker(items);
   }
 
+  var DEMO_NOTE = '<b><span class="en">Read fallback.</span><span class="zh">读取回退。</span></b> <span class="en">Chain reads failed on every endpoint, so the board below shows a labelled demo with invented tokens. Nothing here is real market data; reload to retry the live reads.</span><span class="zh">所有节点的链上读取均失败,因此下方展示板显示标注清楚的演示,使用虚构代币。这里没有任何真实市场数据;重新加载可重试实时读取。</span>';
+
   function showDemo() {
     grid.innerHTML = "";
     var list = DEMO.map(function (d) {
@@ -68,6 +70,20 @@
     list.forEach(function (d) { card(d, true); });
     tickerFrom(list, true);
     if (window.CFCURVE) window.CFCURVE.setDemo();
+    var n = document.getElementById("boardNote");
+    if (n) { n.innerHTML = DEMO_NOTE; n.style.display = ""; }
+  }
+
+  function showEmpty() {
+    grid.innerHTML = "";
+    var el = document.createElement("div");
+    el.className = "empty-card";
+    el.innerHTML = '<b><span class="en">No launches yet</span><span class="zh">尚无发行</span></b>' +
+      '<span><span class="en">The factory is live and the curve is open. The first launch appears here the moment it is created.</span>' +
+      '<span class="zh">工厂已上线,曲线已开放。第一个发行创建后立即出现在这里。</span></span>';
+    grid.appendChild(el);
+    tickerFrom([], false);
+    if (window.CFCURVE) window.CFCURVE.setEmpty();
     var n = document.getElementById("boardNote");
     if (n) n.style.display = "";
   }
@@ -84,6 +100,13 @@
         if (v !== null) setStat("stPassMinted", R.fmtInt(v) + " / " + R.fmtInt(C.passSupply));
       }).catch(function () {});
     }
+    /* FIN claim pool */
+    if (C.claim) {
+      R.ethCall(C.claim, S.poolBalance).then(function (h) {
+        var v = R.decUint(h);
+        if (v !== null) setStat("stClaimPool", R.fmtInt(v / 1000000000000000000n) + " FIN");
+      }).catch(function () {});
+    }
     /* Vault BNB balance (dividend pool so far) */
     if (C.vault) {
       R.rpc("eth_getBalance", [C.vault, "latest"]).then(function (h) {
@@ -97,7 +120,7 @@
       if (count === null) throw new Error("no count");
       setStat("stLaunches", count.toString());
       var n = Number(count);
-      if (n === 0) { showDemo(); return; }
+      if (n === 0) { showEmpty(); return; }
       var idx = [];
       for (var i = Math.max(0, n - 6); i < n; i++) idx.push(i);
       return Promise.all(idx.map(function (i) {
