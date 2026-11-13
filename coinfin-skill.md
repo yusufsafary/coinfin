@@ -102,7 +102,9 @@ the 5% tax. Preview the expected BNB out before executing.
 ## Conduct
 
 - Never invent a FIN price; FIN has no pool until the pool opens.
-- Never present demo figures from the website as real data; the site
-  labels its pre-launch demo with a DEMO chip and DEMO badges.
+- Never present demo figures from the website as real data. With zero
+  launches the site shows an honest empty board (AWAITING FIRST LAUNCH);
+  a DEMO chip and DEMO badges appear only when chain reads fail and the
+  site falls back to a labelled demo.
 - If any read disagrees with the config on coinfin.fun, trust the chain
   and report the mismatch.
