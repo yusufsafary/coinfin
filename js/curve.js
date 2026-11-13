@@ -22,6 +22,8 @@
   var liveReserve = 0;
   var simT = 0.37;              /* demo progress seed, drifts upward */
   var simDir = 1;
+  var disp = -1;                /* eased display progress (buttery motion) */
+  var scrub = -1;               /* pointer position 0..1 while scrubbing, else -1 */
 
   function draw(progress, t) {
     var w = canvas.clientWidth, h = canvas.clientHeight;
@@ -80,22 +82,41 @@
     if (resEl) resEl.textContent = reserve.toFixed(3) + " BNB";
   }
 
-  function frame(t) {
-    if (mode === "empty") {
-      draw(0, t);
-      if (pctEl) pctEl.innerHTML = "0.0% <small>TO GRADUATION</small>";
-      if (resEl) resEl.textContent = "0.000 BNB";
-    } else if (mode === "demo") {
+  function baseProgress(t) {
+    if (mode === "empty") return 0;
+    if (mode === "demo") {
       simT += 0.00045 * simDir;
       if (simT > 0.86) simDir = -1;
       if (simT < 0.34) simDir = 1;
-      var wobble = Math.sin(t / 2600) * 0.012;
-      draw(Math.max(0.02, Math.min(0.97, simT + wobble)), t);
-    } else {
-      draw(Math.max(0.005, Math.min(1, liveReserve / GRAD)), t);
+      return Math.max(0.02, Math.min(0.97, simT + Math.sin(t / 2600) * 0.012));
+    }
+    return Math.max(0.005, Math.min(1, liveReserve / GRAD));
+  }
+
+  function frame(t) {
+    var target = scrub >= 0 ? scrub : baseProgress(t);
+    if (disp < 0 || reduced) disp = target;
+    else disp += (target - disp) * 0.085;            /* ease toward the target */
+    if (Math.abs(target - disp) < 0.0004) disp = target;
+    draw(disp, t);
+    if (mode === "empty" && scrub < 0) {
+      if (pctEl) pctEl.innerHTML = "0.0% <small>TO GRADUATION</small>";
+      if (resEl) resEl.textContent = "0.000 BNB";
     }
     if (!reduced) requestAnimationFrame(frame);
   }
+
+  /* scrub the curve with pointer or touch: preview the road to graduation */
+  function pointerPos(e) {
+    var r = canvas.getBoundingClientRect();
+    return Math.max(0.005, Math.min(1, (e.clientX - r.left) / r.width));
+  }
+  canvas.addEventListener("pointerdown", function (e) { scrub = pointerPos(e); });
+  canvas.addEventListener("pointermove", function (e) { if (scrub >= 0 || e.pointerType === "mouse") scrub = pointerPos(e); });
+  function endScrub() { scrub = -1; }
+  canvas.addEventListener("pointerup", endScrub);
+  canvas.addEventListener("pointerleave", endScrub);
+  canvas.addEventListener("pointercancel", endScrub);
 
   window.CFCURVE = {
     setLive: function (d) {
