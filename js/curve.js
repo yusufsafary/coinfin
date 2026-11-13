@@ -81,7 +81,11 @@
   }
 
   function frame(t) {
-    if (mode === "demo") {
+    if (mode === "empty") {
+      draw(0, t);
+      if (pctEl) pctEl.innerHTML = "0.0% <small>TO GRADUATION</small>";
+      if (resEl) resEl.textContent = "0.000 BNB";
+    } else if (mode === "demo") {
       simT += 0.00045 * simDir;
       if (simT > 0.86) simDir = -1;
       if (simT < 0.34) simDir = 1;
@@ -103,7 +107,13 @@
     },
     setDemo: function () {
       mode = "demo";
-      if (chipEl) chipEl.style.display = "";
+      if (chipEl) { chipEl.textContent = "Demo curve"; chipEl.style.display = ""; }
+    },
+    setEmpty: function () {
+      mode = "empty";
+      if (chipEl) { chipEl.textContent = "Awaiting first launch"; chipEl.style.display = ""; }
+      if (nameEl) nameEl.textContent = "NO LAUNCHES YET";
+      if (reduced) { draw(0, 0); if (pctEl) pctEl.innerHTML = "0.0% <small>TO GRADUATION</small>"; if (resEl) resEl.textContent = "0.000 BNB"; }
     }
   };
 
