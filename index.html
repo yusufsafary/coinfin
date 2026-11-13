@@ -5,18 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>CoinFin Curve · Agent ID Gated Launchpad on BNB Chain</title>
 <meta name="description" content="CoinFin Curve is a bonding curve launchpad on BNB Chain gated by Binance Agent ID, with a Pass NFT that collects BNB season dividends and a 250,000 FIN claim per Pass.">
-<link rel="icon" href="img/logo-final.svg?v=2">
+<link rel="icon" href="img/logo-final.svg?v=3">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=2">
-<script src="js/config.js?v=2"></script>
-<script src="js/read.js?v=2"></script>
-<script src="js/lang.js?v=2"></script>
+<link rel="stylesheet" href="css/style.css?v=3">
+<script src="js/config.js?v=3"></script>
+<script src="js/read.js?v=3"></script>
+<script src="js/lang.js?v=3"></script>
 </head>
 <body>
 <header class="top"><div class="wrap top-in">
-<a class="brand" href="index.html"><img src="img/logo-final.svg?v=2" alt="CoinFin Curve"><span>COINFIN<span class="sub">CURVE</span></span></a>
+<a class="brand" href="index.html"><img src="img/logo-final.svg?v=3" alt="CoinFin Curve"><span>COINFIN<span class="sub">CURVE</span></span></a>
 <nav class="main"><a href="index.html" class="on"><span class="en">Home</span><span class="zh">首页</span></a><a href="tokenomics.html"><span class="en">Tokenomics</span><span class="zh">代币经济</span></a><a href="whitepaper.html"><span class="en">Whitepaper</span><span class="zh">白皮书</span></a><a href="docs.html"><span class="en">Docs</span><span class="zh">文档</span></a><a href="swap.html"><span class="en">Swap</span><span class="zh">兑换</span></a><a href="about.html"><span class="en">About</span><span class="zh">关于</span></a></nav>
 <span class="langsw"><button id="swEn" onclick="setLang('en')">EN</button><button id="swZh" onclick="setLang('zh')">中文</button></span>
 </div></header>
@@ -40,6 +40,7 @@
       <div class="curve-sub"><span class="en">FEATURED</span><span class="zh">精选</span> <b id="heroLaunchName">DEMO LAUNCH</b><br><span class="en">RESERVE</span><span class="zh">储备</span> <b id="heroReserve">0.000 BNB</b> / 8 BNB</div>
     </div>
   </div>
+  <p class="curve-hint"><span class="en">Drag across the curve to preview the road to graduation</span><span class="zh">在曲线上拖动,预览通往毕业的路</span></p>
   <div class="stats">
     <div class="stat"><div class="k"><span class="en">Pass minted</span><span class="zh">已铸造 Pass</span></div><div class="v" id="stPassMinted">··· <small>/ 10,000</small></div></div>
     <div class="stat"><div class="k"><span class="en">Launches on curve</span><span class="zh">曲线上的发行</span></div><div class="v" id="stLaunches">0</div></div>
@@ -50,6 +51,7 @@
     <div><div class="lbl"><span class="en">Season</span><span class="zh">季度</span></div><div class="n">S<span id="seasonNo">1</span></div></div>
     <div class="muted" style="font-size:14.5px"><span class="en">Seasons run 14 days. At each season close, the dividend vault splits its BNB across Pass holders, one share per Pass. Season 1 is live now.</span><span class="zh">每季 14 天。每季结束时,分红金库把 BNB 按每张 Pass 一份分给持有者。第 1 季已经开启。</span></div>
     <div class="count"><span class="lbl"><span class="en">Ends in</span><span class="zh">结束倒计时</span></span><b id="seasonCount">TBA</b></div>
+    <div class="season-bar"><i id="seasonBar"></i></div>
   </div>
 </section>
 
@@ -137,7 +139,7 @@ Follow the CoinFin skill file at https://coinfin.fun/coinfin-skill.md.
 <footer class="site"><div class="wrap">
 <div class="foot-in">
 <div>
-<a class="brand" href="index.html"><img src="img/logo-final.svg?v=2" alt="CoinFin Curve"><span>COINFIN<span class="sub">CURVE</span></span></a>
+<a class="brand" href="index.html"><img src="img/logo-final.svg?v=3" alt="CoinFin Curve"><span>COINFIN<span class="sub">CURVE</span></span></a>
 <p class="muted" style="margin-top:12px;font-size:14px"><span class="en">Bonding curve launches gated by Binance Agent ID, with a Pass that collects.</span><span class="zh">由币安 Agent ID 把关的联合曲线发行,配一张会分红的 Pass。</span></p>
 <a class="social" href="https://x.com/coinfinfun" target="_blank" rel="noopener">X · @coinfinfun</a>
 </div>
@@ -163,8 +165,8 @@ Follow the CoinFin skill file at https://coinfin.fun/coinfin-skill.md.
 </div>
 <div class="foot-base"><span>COINFIN CURVE · BNB CHAIN · CHAIN ID 56</span><span>coinfin.fun</span></div>
 </div></footer>
-<script src="js/app.js?v=2"></script>
+<script src="js/app.js?v=3"></script>
 <script>setLang(document.documentElement.getAttribute("data-lang") || "en");</script>
-<script src="js/board.js?v=2"></script><script src="js/claim.js?v=2"></script><script src="js/curve.js?v=2"></script>
+<script src="js/board.js?v=3"></script><script src="js/claim.js?v=3"></script><script src="js/curve.js?v=3"></script>
 </body>
 </html>
