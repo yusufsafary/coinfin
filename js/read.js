@@ -76,6 +76,7 @@
     symbol: "0x95d89b41",
     mintOpen: "0x24bbd049",
     claimOpen: "0x4b8bcb58",
+    poolBalance: "0x96365d44",
     claimedById: "0x4c80ee12",
     launchCount: "0x63d0053d",
     launchInfo: "0x6aef1576",
