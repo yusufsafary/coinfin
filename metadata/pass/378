@@ -1,0 +1,19 @@
+{
+ "name": "CoinFin Pass #378",
+ "description": "CoinFin Pass: access key to the CoinFin Curve launchpad on BNB Chain. Holders buy pre-graduation curves with a 2% wallet cap, share the BNB dividend vault every 14-day season, and claim 250,000 FIN once per Pass.",
+ "image": "https://coinfin.fun/metadata/pass/img/378.svg",
+ "attributes": [
+  {
+   "trait_type": "Pass",
+   "value": 378
+  },
+  {
+   "trait_type": "Curve progress (art)",
+   "value": "95%"
+  },
+  {
+   "trait_type": "Access",
+   "value": "Dividend vault + FIN claim"
+  }
+ ]
+}
