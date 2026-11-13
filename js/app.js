@@ -56,6 +56,8 @@
           m = Math.floor(left % 3600 / 60), s = left % 60;
       sNo.textContent = String(idx + 1);
       sCount.textContent = d + "d " + pad(h) + ":" + pad(m) + ":" + pad(s);
+      var bar = document.getElementById("seasonBar");
+      if (bar) bar.style.width = (((now - C.seasonGenesis - idx * len) / len) * 100).toFixed(2) + "%";
     }
     tickSeason();
     setInterval(tickSeason, 1000);
