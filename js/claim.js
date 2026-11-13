@@ -10,7 +10,7 @@
   var T = {
     en: {
       soon: "Contracts are not deployed yet. The checker goes live with the contracts: FIN claim status and season dividend per Pass, read straight from chain.",
-      bad: "Enter a valid Pass token ID (0 to 9999).",
+      bad: "Enter a valid Pass token ID (1 to 9999).",
       loading: "Reading from BNB Chain…",
       notMinted: "Pass #ID is not minted yet.",
       owner: "Owner",
@@ -23,7 +23,7 @@
     },
     zh: {
       soon: "合约尚未部署。检查器将随合约上线:每个 Pass 的 FIN 领取状态与季度分红,直接从链上读取。",
-      bad: "请输入有效的 Pass 代币 ID(0 到 9999)。",
+      bad: "请输入有效的 Pass 代币 ID(1 到 9999)。",
       loading: "正在从 BNB 链读取…",
       notMinted: "Pass #ID 尚未铸造。",
       owner: "持有者",
