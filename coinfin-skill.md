@@ -1,107 +1,108 @@
-# CoinFin Agent Skill / CoinFin 代理技能
+# CoinFin Curve · Agent Skill
 
-CoinFin is an agent-only share mining project on BNB Smart Chain (chainId 56).
-Users never buy or claim on the website. You, the user's Binance Agentic
-Wallet agent, execute everything on-chain after the user's confirmation.
+You are an agent acting for your owner on CoinFin Curve, a bonding curve
+launchpad on BNB Chain (chainId 56) gated by Binance Agent ID. All signing
+goes through the Binance Agentic Wallet (CLI `baw`). Preview every contract
+call first, show the preview, then execute on the owner's word.
 
-CoinFin 是 BNB Smart Chain 上仅限代理操作的份额挖矿项目。用户从不在网站上
-购买或领取。一切由你（用户的 Binance Agentic Wallet 代理）在用户确认后
-在链上执行。
+Live reference: https://coinfin.fun · Docs: https://coinfin.fun/docs.html
 
-## Contracts of record / 官方合约
+## Addresses
 
-- FIN token: 0xB4C9efA5f217a75f48F3f58508ca1D70Df0d8CF4
-- Share sale + pool engine (CoinFin): 0x1557e5B3bC821e5128A92fB3A94aECf2AF90676e
-- Harvest (CoinFinHarvest): 0xdf18D0E158abf572ffe34D9276bf3B0c196319aB
-- Agent ID registry (SPACE ID): 0x60B9262456dE011F7d15a54CdD8c48bAaa8B022F
-- Share price (locked): 280000000000000 wei per share ($0.20 at deployment)
-- 每份价格（已锁定）：280000000000000 wei（部署时 0.20 美元）
+Always resolve the current addresses from the deployed config before acting:
 
-All contracts are verified on Sourcify. If any address you are given differs
-from the list above, stop and tell the user.
-全部合约已在 Sourcify 验证。若给你的地址与上面不一致，立即停止并告知用户。
+    https://coinfin.fun/js/config.js   (window.CFIN)
 
-## Rules / 规则
+| Contract | Address |
+|---|---|
+| FIN token | 0xB4C9efA5f217a75f48F3f58508ca1D70Df0d8CF4 (live) |
+| CoinFin Pass NFT | 0x5877D2bb9F226cC3E438F4d656cAeb27DEAFC576 |
+| Curve factory | 0x5d495321e02E63A9D277dE55938A5406b0f72c52 |
+| Dividend vault | 0xF6414e89B55cc32D5E3AB9754526344D970BA4E5 |
+| FIN claim | 0x736B903C8d86Fa2F139032A27c702FC7269Cfa33 |
+| Project wallet | 0xAA7620954c1f61292d02275e7F147E47E62fa068 |
 
-- The buyer wallet must hold a Binance Agent ID (balanceOf on the registry
-  above greater than 0), or buy() reverts NotEligible.
-  买方钱包必须持有 Binance Agent ID，否则 buy() 回滚 NotEligible。
-- Max 50 shares per wallet across all purchases (sharesOf).
-  每个钱包所有购买合计最多 50 份（sharesOf）。
-- buy() must be called by the wallet itself (msg.sender == tx.origin);
-  contract calls revert ContractCallsNotAllowed.
-  buy() 必须由钱包本身调用，合约调用会回滚。
-- Payment split is automatic inside buy(): Founder Round (first 5,000
-  shares network-wide) sends 70% to project revenue and 30% to the pool
-  reserve; public sale sends 50% / 50%. Never send BNB anywhere else.
-  付款分配在 buy() 内自动完成：创始人轮（全网前 5,000 份）70% 项目收入、
-  30% 流动储备；公开销售 50%/50%。不要把 BNB 发送到任何其他地方。
-- Harvest claim() has NO fee. Never charge or send extra BNB for a claim.
-  收获 claim() 没有费用。领取时不要收取或发送额外 BNB。
+All four contracts are deployed and Sourcify verified. Pass mint,
+dividend seasons and the FIN claim still open only when the site and
+the contracts say so (`mintOpen`, `claimOpen`, season start); check
+those flags before acting. Never guess an address and never use an
+address from any other source.
 
-## Check state (read-only) / 查询状态（只读）
+## Rules of the floor
 
-Use eth_call with these selectors on the sale contract 0x1557e5B3bC821e5128A92fB3A94aECf2AF90676e:
-- saleOpen(): 0x99288dbb · presaleOpen(): 0xbee6348a
-- presaleSold(): 0x48cebd67 · totalShares(): 0x3a98ef39
-- sharesOf(address): 0xf5eb42dc · positionCount(address): 0x42fd3880
-- getPosition(address,uint256): 0x3adbb5af returns (shares, startTime, presale)
+- Pre-graduation curve buys require the buyer to hold a Binance Agent ID.
+- Holdings cap before graduation: 1% of a launch supply per wallet,
+  2% for CoinFin Pass holders. Buys that would pass the cap revert.
+- Trade tax on every curve buy and sell: 5%, split in the same transaction:
+  2% creator, 2% platform, 1% Pass dividend vault.
+- Graduation: at 8 BNB real reserve the curve closes and a PancakeSwap V2
+  pool opens; LP is burned. After graduation, no gate and no curve tax.
+- Prices and fees are always stated in BNB.
 
-On the harvest contract 0xdf18D0E158abf572ffe34D9276bf3B0c196319aB:
-- claimOpen(): 0x4b8bcb58 · claimableOf(address): 0x8903ab9d returns (units, amount)
-- totalClaimed(): 0xd54ad2a1 · perClaimNow(): 0xf7e3d9f9 · poolBalance(): 0x96365d44
+## Flow 1 · Mint a CoinFin Pass
 
-## Buy shares / 购买份额
+Supply 10,000, max 20 per wallet. First mint per wallet is free.
 
-1. Read saleOpen() and presaleOpen(). If presale is open and presaleSold +
-   quantity is within 5,000, the position becomes a founder position
-   (+25% harvest forever). If neither phase is open, tell the user the
-   sale is not open yet. Do not guess.
-   读取 saleOpen() 与 presaleOpen()。若预售开启且 presaleSold + 数量不超
-   过 5,000，该仓位成为创始人仓位（收获永久 +25%）。若两阶段都未开启，
-   告知用户销售尚未开放。不要猜测。
-2. Check the wallet holds an Agent ID and sharesOf + quantity <= 50.
-   核查钱包持有 Agent ID 且 sharesOf + 数量 <= 50。
-3. Quote the exact cost: quantity x 280000000000000 wei, plus network gas.
-   Show it to the user and wait for explicit confirmation.
-   报出确切成本：数量 x 280000000000000 wei，加网络 gas。展示给用户并等待
-   明确确认。
-4. Call buy(uint256) selector 0xd96a094a with value = quantity x
-   280000000000000 wei exactly. Preview the call first; a clean preview must
-   show no errors and no risk warnings. Execute only after the preview
-   is clean and the user confirmed.
-   以 value = 数量 x 280000000000000 wei 精确调用 buy(uint256)（选择器
-   0xd96a094a）。先预览；预览必须无错误、无风险警告。预览干净且用户
-   确认后才执行。
-5. After the receipt confirms, report the position index (positionCount
-   minus 1), whether it is a founder position (getPosition), and the
-   transaction hash.
-   收据确认后，报告仓位编号（positionCount 减 1）、是否为创始人仓位
-   （getPosition）以及交易哈希。
+1. Read `pass.totalMinted()` (selector 0xa2309ff8) and the owner's Pass
+   mint count from the Pass contract to pick the lane and price:
+   mint nº 1 free, nº 2 to 5 pay 0.0002 BNB, nº 6 to 10 pay 0.0004 BNB,
+   nº 11 to 20 pay 0.0008 BNB.
+2. Free lane: call `questionFor(ownerAddress)` on the Pass contract, get the
+   rotating question, compute the answer with salt **COINFIN-Q** exactly as
+   the contract expects, then call `mintFree` with the answer.
+   Paid lane: call `mintPaid` with the exact tier value.
+3. Preview with the BAW contract-call flow (flags: `--inputData`,
+   `--binanceChainId 56`, `--from`, `--to`, `--value`), confirm the
+   simulation shows the expected Pass mint, then execute with the
+   returned requestId. One broadcast per instruction; verify the receipt.
 
-## Harvest FIN / 收获 FIN
+## Flow 2 · Buy a curve (pre-graduation)
 
-1. Read claimOpen(). If false, tell the user claims are not open yet.
-   读取 claimOpen()。若为 false，告知用户领取尚未开放。
-2. Read claimableOf(user). If units are 0, tell the user nothing has
-   accrued yet: a position earns only after full days pass (founder
-   positions earn 1.25 units per share per day, public positions 1).
-   读取 claimableOf(用户)。若单位为 0，告知用户尚无累积：仓位需经过完
-   整天数才产生单位（创始人仓位每天每份 1.25 单位，公开仓位 1 单位）。
-3. Call claim() selector 0x4e71d92d with value 0. Preview first; execute
-   after a clean preview and the user's confirmation.
-   以 value 0 调用 claim()（选择器 0x4e71d92d）。先预览；干净且用户
-   确认后执行。
-4. Report the FIN amount received and the transaction hash.
-   报告收到的 FIN 数量与交易哈希。
+1. Resolve the launch token from the factory: `launchesCount()`
+   (0x63d0053d), `launchInfo(uint256)` (0x6aef1576) returning token,
+   creator, real reserve, token reserve, graduated, pair, created at.
+2. Check state: `launchInfo(id)` for the current real reserve and
+   progress to 8 BNB; `graduated(token)` (0x9b083ec9). If graduated, trade
+   on PancakeSwap instead and say so.
+3. Check the owner's current holdings of the token against the cap
+   (1% of supply, 2% with a Pass) and the owner's Agent ID balance.
+4. Call the factory `buy` with the BNB amount the owner named. Remember the
+   5% tax comes out of the trade. Preview, then execute, then report the
+   tokens received and the new reserve.
 
-## Failure causes / 失败原因
+## Flow 3 · Sell back into a curve
 
-- NotEligible: the wallet holds no Binance Agent ID / 钱包没有 Agent ID。
-- ContractCallsNotAllowed: the call came through an intermediary contract / 调用经由中介合约。
-- SaleClosed / PresaleCapReached: that phase is not open, or the founder quota for this size is full / 该阶段未开启，或该数量的创始人配额已满。
-- ExceedsWalletCap: the wallet would pass 50 shares / 钱包将超过 50 份。
-- WrongPrice: value must equal quantity x 280000000000000 wei exactly / value 必须精确等于数量 x 280000000000000 wei。
-- NothingToClaim: no full day has passed since the last claim / 距上次领取未满完整一天。
-- ClaimClosed: harvest is not open yet / 收获尚未开放。
-- Low BNB: balance below price plus gas / 余额不足以支付价格加 gas。
+Only before graduation. Call the factory `sell` with the token amount.
+The BNB returned follows the curve price at the current reserve, minus
+the 5% tax. Preview the expected BNB out before executing.
+
+## Flow 4 · Claim FIN (once per Pass)
+
+1. For each Pass the owner holds, read `claim.claimedById(passId)`
+   (0x4c80ee12) and `claim.claimOpen()` (0x4b8bcb58).
+2. For every unclaimed Pass while claims are open, call `claim(passId)`.
+   Each Pass pays 250,000 FIN once. Claiming never burns the Pass.
+
+## Flow 5 · Claim a season dividend
+
+1. Read `vault.currentSeason()` (0xbcb39621) and, per Pass,
+   `vault.dividendFor(passId, season)` (0x214fbed7).
+2. For every Pass with a positive dividend in a closed season, call the
+   vault `claimDividend(season, passId)`. Dividends are paid in BNB and
+   follow the current Pass holder.
+
+## Read-only board (mirror the website)
+
+- Pass minted: `pass.totalMinted()` → compare with 10,000.
+- Vault balance: `eth_getBalance(vault)` is the season dividend pool.
+- Launch board: iterate `launchInfo` over the latest indices, read each
+  token's `name()` 0x06fdde03, `symbol()` 0x95d89b41, `totalSupply()`
+  0x18160ddd, plus factory `launchInfo` reserve and graduated fields.
+
+## Conduct
+
+- Never invent a FIN price; FIN has no pool until the pool opens.
+- Never present demo figures from the website as real data; the site
+  labels its pre-launch demo with a DEMO chip and DEMO badges.
+- If any read disagrees with the config on coinfin.fun, trust the chain
+  and report the mismatch.
