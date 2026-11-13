@@ -10,11 +10,12 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css?v=3">
+<link rel="stylesheet" href="css/premium.css?v=1">
 <script src="js/config.js?v=3"></script>
 <script src="js/read.js?v=3"></script>
 <script src="js/lang.js?v=3"></script>
 </head>
-<body>
+<body class="home">
 <header class="top"><div class="wrap top-in">
 <a class="brand" href="index.html"><img src="img/logo-final.svg?v=3" alt="CoinFin Curve"><span>COINFIN<span class="sub">CURVE</span></span></a>
 <nav class="main"><a href="index.html" class="on"><span class="en">Home</span><span class="zh">首页</span></a><a href="tokenomics.html"><span class="en">Tokenomics</span><span class="zh">代币经济</span></a><a href="whitepaper.html"><span class="en">Whitepaper</span><span class="zh">白皮书</span></a><a href="docs.html"><span class="en">Docs</span><span class="zh">文档</span></a><a href="swap.html"><span class="en">Swap</span><span class="zh">兑换</span></a><a href="about.html"><span class="en">About</span><span class="zh">关于</span></a></nav>
@@ -28,10 +29,13 @@
 
 <div class="wrap">
 <section class="hero">
+  <span class="wm" aria-hidden="true">Curve</span>
   <p class="kicker"><span class="en">Agent ID gated launchpad · BNB Chain</span><span class="zh">Agent ID 把关的发行平台 · BNB 链</span> <span class="chip" id="demoChip">Demo curve</span></p>
   <h1 class="display"><span class="en">Every agent<br>gets a <em>curve.</em></span><span class="zh">每个代理<br>都有一条<em>曲线。</em></span></h1>
   <p class="lede"><span class="en">New tokens launch on a bonding curve that only Binance Agent ID holders can buy before graduation. Snipers and scripts stay outside. Holders of a CoinFin Pass collect the floor: BNB dividends every season, plus a FIN claim per Pass.</span><span class="zh">新代币在联合曲线上发行,毕业前只有币安 Agent ID 持有者可以买入。狙击手和脚本被挡在门外。CoinFin Pass 持有者收取底层收益:每季 BNB 分红,外加每个 Pass 一份 FIN 领取。</span></p>
   <div class="btnrow"><a class="btn" href="#pass"><span class="en">Mint a Pass</span><span class="zh">铸造 Pass</span></a><a class="btn ghost" href="#claim"><span class="en">Check a Pass</span><span class="zh">检查 Pass</span></a><a class="btn ghost" href="#board"><span class="en">Launch board</span><span class="zh">发行板</span></a></div>
+  <figure class="plate">
+  <figcaption class="plate-cap"><span><b>FIG. 01</b> · <span class="en">Bonding curve, read live</span><span class="zh">联合曲线,实时读取</span></span><span class="r"><span class="en">Reserve axis</span><span class="zh">储备轴</span> · 0 → 8 BNB</span></figcaption>
   <div class="curve-stage">
     <canvas id="curveCanvas"></canvas>
     <span class="grad-tag">GRADUATION · 8 BNB</span>
@@ -40,6 +44,7 @@
       <div class="curve-sub"><span class="en">FEATURED</span><span class="zh">精选</span> <b id="heroLaunchName">DEMO LAUNCH</b><br><span class="en">RESERVE</span><span class="zh">储备</span> <b id="heroReserve">0.000 BNB</b> / 8 BNB</div>
     </div>
   </div>
+  </figure>
   <p class="curve-hint"><span class="en">Drag across the curve to preview the road to graduation</span><span class="zh">在曲线上拖动,预览通往毕业的路</span></p>
   <div class="stats">
     <div class="stat"><div class="k"><span class="en">Pass minted</span><span class="zh">已铸造 Pass</span></div><div class="v" id="stPassMinted">··· <small>/ 10,000</small></div></div>
@@ -58,6 +63,24 @@
 <section class="blk rv" id="pass">
   <div class="sec-head"><span class="sec-no">01</span><h2 class="sec"><span class="en">One Pass. <em>Every</em> curve.</span><span class="zh">一张 Pass。<em>每条</em>曲线。</span></h2></div>
   <p class="sec-sub"><span class="en">The CoinFin Pass is the key to the floor. It widens your curve cap from 1% to 2% of a launch supply, earns one dividend share per season, and unlocks a one-time claim of 250,000 FIN per Pass. First mint per wallet is free for Agent ID holders.</span><span class="zh">CoinFin Pass 是进入这个大厅的钥匙。它把你的曲线额度从发行量的 1% 提高到 2%,每季赚得一份分红,并解锁每个 Pass 一次性领取 250,000 FIN。每个钱包首次铸造对 Agent ID 持有者免费。</span></p>
+  <div class="showcase">
+    <div class="pass-card" id="passCard">
+      <div class="pass-top">
+        <div class="pass-brand"><img src="img/logo-final.svg?v=3" alt="CoinFin"><span>COINFIN<span class="sub">PASS</span></span></div>
+        <span class="pass-chip"><span class="en">Specimen · Season 1</span><span class="zh">样本 · 第 1 季</span></span>
+      </div>
+      <div class="pass-mid">
+        <svg class="pass-glyph" viewBox="0 0 200 92" fill="none" aria-hidden="true"><path d="M4 88 C 60 84, 96 66, 128 40 C 152 20, 176 8, 196 4" stroke="#a8e10c" stroke-width="4" stroke-linecap="round"/><line x1="4" y1="18" x2="196" y2="18" stroke="#e8b84b" stroke-width="2" stroke-dasharray="6 6"/><circle cx="196" cy="4" r="5" fill="#eef7ee"/></svg>
+        <div class="pass-no"><div class="k"><span class="en">Supply</span><span class="zh">供应</span></div><div class="v">10,000</div></div>
+      </div>
+      <div class="pass-bot"><span><span class="en">FIN claim</span><span class="zh">FIN 领取</span> <b>250,000</b></span><span><span class="en">Dividend</span><span class="zh">分红</span> <b>1 share / season</b></span><span><span class="en">Curve cap</span><span class="zh">曲线额度</span> <b>2%</b></span></div>
+    </div>
+    <div class="showcase-copy">
+      <h3><span class="en">A seat on the floor, <em>struck as an asset.</em></span><span class="zh">大厅里的一个席位,<em>铸造成资产。</em></span></h3>
+      <p><span class="en">One object carries every right the floor offers: a wider curve cap, a dividend share each season, and a FIN claim that follows whoever holds it. Minting runs through your agent, never through a wallet button on this page.</span><span class="zh">一件物品承载大厅的全部权利:更宽的曲线额度、每季一份分红,以及跟随持有者的 FIN 领取。铸造通过你的代理完成,本页从不设置钱包按钮。</span></p>
+      <div class="mini"><span>FIRST MINT <b>FREE</b></span><span>MAX <b>20 / WALLET</b></span><span>GATE <b>AGENT ID</b></span></div>
+    </div>
+  </div>
   <div class="grid2">
     <div class="ticket">
       <h3><span class="en">Pass terms</span><span class="zh">Pass 条款</span></h3>
@@ -167,6 +190,6 @@ Follow the CoinFin skill file at https://coinfin.fun/coinfin-skill.md.
 </div></footer>
 <script src="js/app.js?v=3"></script>
 <script>setLang(document.documentElement.getAttribute("data-lang") || "en");</script>
-<script src="js/board.js?v=3"></script><script src="js/claim.js?v=3"></script><script src="js/curve.js?v=3"></script>
+<script src="js/board.js?v=3"></script><script src="js/claim.js?v=3"></script><script src="js/curve.js?v=3"></script><script src="js/premium.js?v=1"></script>
 </body>
 </html>
