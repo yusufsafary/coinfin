@@ -59,6 +59,7 @@ nav.main a {
   color: var(--muted); font-family: var(--mono); font-size: 12.5px;
   padding: 7px 10px; border-radius: 8px; letter-spacing: 0.04em;
 }
+nav.main a { transition: color 0.15s ease, background 0.15s ease; }
 nav.main a:hover { color: var(--paper); text-decoration: none; background: var(--panel); }
 nav.main a.on { color: var(--ink); background: var(--lime); font-weight: 700; }
 .langsw { display: flex; gap: 4px; }
@@ -87,6 +88,7 @@ nav.main a.on { color: var(--ink); background: var(--lime); font-weight: 700; }
   animation: tick 42s linear infinite; padding: 7px 0;
   font-family: var(--mono); font-size: 12px; color: var(--muted);
 }
+.ticker:hover .ticker-track { animation-play-state: paused; }
 .ticker-track span { padding: 0 18px; }
 .ticker-track b { color: var(--lime); font-weight: 700; }
 .ticker-track .g { color: var(--gold); }
@@ -118,7 +120,8 @@ h1.display em, h2.sec em { font-style: italic; color: var(--lime); text-transfor
   background: linear-gradient(180deg, rgba(13, 42, 31, 0.65), rgba(6, 18, 14, 0.4));
   overflow: hidden;
 }
-.curve-stage canvas { display: block; width: 100%; height: 250px; }
+.curve-stage canvas { display: block; width: 100%; height: 250px; cursor: crosshair; touch-action: pan-y; }
+.curve-hint { font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em; color: var(--faint); text-transform: uppercase; text-align: center; margin-top: 10px; }
 @media (min-width: 760px) { .curve-stage canvas { height: 340px; } }
 .grad-tag {
   position: absolute; right: 12px; top: 12px;
@@ -157,6 +160,8 @@ h1.display em, h2.sec em { font-style: italic; color: var(--lime); text-transfor
 .season .lbl { font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em; color: var(--muted); text-transform: uppercase; }
 .season .count { margin-left: auto; font-family: var(--mono); text-align: right; }
 .season .count b { font-size: 22px; color: var(--paper); display: block; }
+.season-bar { width: 100%; height: 7px; border-radius: 99px; background: var(--ink); border: 1px solid var(--line); overflow: hidden; }
+.season-bar i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--lime-dim), var(--lime)); border-radius: 99px; transition: width 1s linear; }
 
 /* ---------- sections ---------- */
 section.blk { padding: 44px 0 6px; }
@@ -189,7 +194,10 @@ h2.sec { font-size: clamp(28px, 5.6vw, 46px); font-weight: 700; text-transform: 
 .ticket .row span { color: var(--faint); }
 
 /* launch cards */
-.launch-card { background: var(--panel); border: 1.5px dashed var(--line); border-radius: 16px; padding: 18px; position: relative; overflow: hidden; }
+.launch-card { background: var(--panel); border: 1.5px dashed var(--line); border-radius: 16px; padding: 18px; position: relative; overflow: hidden; transition: transform 0.25s ease, border-color 0.25s ease; }
+.launch-card:hover { transform: translateY(-3px); border-color: var(--lime-dim); }
+.ticket { transition: border-color 0.25s ease; }
+.ticket:hover { border-color: var(--lime-dim); }
 .launch-card .sym { font-family: var(--mono); font-weight: 700; font-size: 22px; color: var(--paper); }
 .launch-card .nm { color: var(--muted); font-size: 13.5px; }
 .launch-card canvas.spark { display: block; width: 100%; height: 64px; margin: 12px 0 4px; }
@@ -218,8 +226,10 @@ h2.sec { font-size: clamp(28px, 5.6vw, 46px); font-weight: 700; text-transform: 
   display: inline-block; background: var(--lime); color: var(--ink); font-weight: 700;
   font-family: var(--mono); font-size: 14px; padding: 12px 20px; border-radius: 12px;
   border: none; cursor: pointer; letter-spacing: 0.03em;
+  transition: transform 0.18s cubic-bezier(0.2, 0.7, 0.3, 1.25), filter 0.18s ease, background 0.18s ease, border-color 0.18s ease;
 }
-.btn:hover { text-decoration: none; filter: brightness(1.07); }
+.btn:hover { text-decoration: none; filter: brightness(1.07); transform: translateY(-1px); }
+.btn:active { transform: translateY(0) scale(0.98); }
 .btn.ghost { background: none; color: var(--lime); border: 1.5px solid var(--lime-dim); }
 .btn.gold { background: var(--gold); }
 .btnrow { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px; }
@@ -290,7 +300,9 @@ footer.site { margin-top: 60px; border-top: 1.5px dashed var(--line); background
 .foot-in { display: grid; grid-template-columns: minmax(0, 1fr); gap: 26px; padding: 34px 0 10px; }
 @media (min-width: 820px) { .foot-in { grid-template-columns: 1.4fr 1fr 1fr 1.3fr; } }
 .foot-in h4 { font-family: var(--mono); font-size: 11px; letter-spacing: 0.24em; color: var(--gold); text-transform: uppercase; margin-bottom: 12px; }
-.foot-in a { display: block; color: var(--muted); font-size: 14px; padding: 3px 0; }
+.foot-in a { display: block; color: var(--muted); font-size: 14px; padding: 3px 0; transition: color 0.15s ease; }
+:focus-visible { outline: 2px solid var(--lime); outline-offset: 2px; border-radius: 4px; }
+input.field { transition: border-color 0.2s ease; }
 .foot-in a:hover { color: var(--lime); }
 .foot-in .addr { font-family: var(--mono); font-size: 12px; color: var(--muted); overflow-wrap: anywhere; padding: 7px 0; border-top: 1px dashed var(--line-soft); }
 .foot-in .addr b { color: var(--paper); display: block; font-size: 11px; letter-spacing: 0.14em; margin-bottom: 2px; }
