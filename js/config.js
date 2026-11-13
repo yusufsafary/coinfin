@@ -26,7 +26,7 @@ window.CFIN = {
   launchFeeBnb: "0.05",
 
   seasonDays: 14,
-  seasonGenesis: null, /* unix seconds of Season 1 start, set at opening */
+  seasonGenesis: 1794585154, /* unix seconds of Season 1 start (Vault.startSeasons) */
   finPerPass: "250000",
 
   pancakeSwap: "https://pancakeswap.finance/swap?outputCurrency=0xB4C9efA5f217a75f48F3f58508ca1D70Df0d8CF4",
