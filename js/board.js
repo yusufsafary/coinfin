@@ -90,6 +90,22 @@
 
   function setStat(id, txt) { var e = document.getElementById(id); if (e) e.textContent = txt; }
 
+  /* count-up for headline numbers (skipped under reduced motion) */
+  var reducedMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function countUp(id, to, fmt) {
+    var e = document.getElementById(id);
+    if (!e) return;
+    if (reducedMotion || to <= 0) { e.textContent = fmt(to); return; }
+    var t0 = null, dur = 900;
+    function step(ts) {
+      if (!t0) t0 = ts;
+      var k = Math.min(1, (ts - t0) / dur), ease = 1 - Math.pow(1 - k, 3);
+      e.textContent = fmt(Math.round(to * ease));
+      if (k < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
   /* ---------- live reads ---------- */
   function live() {
     var S = R.SEL;
@@ -97,21 +113,21 @@
     if (C.pass) {
       R.ethCall(C.pass, S.totalMinted).then(function (h) {
         var v = R.decUint(h);
-        if (v !== null) setStat("stPassMinted", R.fmtInt(v) + " / " + R.fmtInt(C.passSupply));
+        if (v !== null) countUp("stPassMinted", Number(v), function (n) { return R.fmtInt(n) + " / " + R.fmtInt(C.passSupply); });
       }).catch(function () {});
     }
     /* FIN claim pool */
     if (C.claim) {
       R.ethCall(C.claim, S.poolBalance).then(function (h) {
         var v = R.decUint(h);
-        if (v !== null) setStat("stClaimPool", R.fmtInt(v / 1000000000000000000n) + " FIN");
+        if (v !== null) countUp("stClaimPool", Number(v / 1000000000000000000n), function (n) { return R.fmtInt(n) + " FIN"; });
       }).catch(function () {});
     }
     /* Vault BNB balance (dividend pool so far) */
     if (C.vault) {
       R.rpc("eth_getBalance", [C.vault, "latest"]).then(function (h) {
         var v = R.decUint(h);
-        if (v !== null) setStat("stVault", R.fmtBnb(v, 6) + " BNB");
+        if (v !== null) countUp("stVault", Number(v), function (w) { return R.fmtBnb(BigInt(Math.round(w)), 6) + " BNB"; });
       }).catch(function () {});
     }
     /* Launches */
