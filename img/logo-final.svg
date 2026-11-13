@@ -1,0 +1,16 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1024" height="1024" fill="#06120e"/>
+  <defs>
+    <filter id="soft" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="16"/></filter>
+    <filter id="soft2" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="26"/></filter>
+  </defs>
+  <circle cx="512" cy="512" r="446" fill="none" stroke="#a8e10c" stroke-opacity="0.55" stroke-width="5" stroke-dasharray="26 20"/>
+  <!-- rising curve (glow, then core) -->
+  <path d="M346 754 C 520 726, 684 528, 758 202" fill="none" stroke="#a8e10c" stroke-opacity="0.38" stroke-width="92" stroke-linecap="round" filter="url(#soft)"/>
+  <!-- C -->
+  <path d="M743 706 A 302 302 0 1 1 743 318" fill="none" stroke="#eef7ee" stroke-width="84" stroke-linecap="round"/>
+  <!-- curve core on top of the C exit -->
+  <path d="M346 754 C 520 726, 684 528, 758 202" fill="none" stroke="#a8e10c" stroke-width="50" stroke-linecap="round"/>
+  <circle cx="758" cy="202" r="74" fill="#e8b84b" opacity="0.28" filter="url(#soft2)"/>
+  <circle cx="758" cy="202" r="40" fill="#e8b84b"/>
+</svg>
