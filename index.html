@@ -5,18 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>CoinFin Curve · Agent ID Gated Launchpad on BNB Chain</title>
 <meta name="description" content="CoinFin Curve is a bonding curve launchpad on BNB Chain gated by Binance Agent ID, with a Pass NFT that collects BNB season dividends and a 250,000 FIN claim per Pass.">
-<link rel="icon" href="img/favicon.svg?v=1">
+<link rel="icon" href="img/logo-final.svg?v=2">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=1">
-<script src="js/config.js?v=1"></script>
-<script src="js/read.js?v=1"></script>
-<script src="js/lang.js?v=1"></script>
+<link rel="stylesheet" href="css/style.css?v=2">
+<script src="js/config.js?v=2"></script>
+<script src="js/read.js?v=2"></script>
+<script src="js/lang.js?v=2"></script>
 </head>
 <body>
 <header class="top"><div class="wrap top-in">
-<a class="brand" href="index.html"><img src="img/logo.svg?v=1" alt="CoinFin Curve"><span>COINFIN<span class="sub">CURVE</span></span></a>
+<a class="brand" href="index.html"><img src="img/logo-final.svg?v=2" alt="CoinFin Curve"><span>COINFIN<span class="sub">CURVE</span></span></a>
 <nav class="main"><a href="index.html" class="on"><span class="en">Home</span><span class="zh">首页</span></a><a href="tokenomics.html"><span class="en">Tokenomics</span><span class="zh">代币经济</span></a><a href="whitepaper.html"><span class="en">Whitepaper</span><span class="zh">白皮书</span></a><a href="docs.html"><span class="en">Docs</span><span class="zh">文档</span></a><a href="swap.html"><span class="en">Swap</span><span class="zh">兑换</span></a><a href="about.html"><span class="en">About</span><span class="zh">关于</span></a></nav>
 <span class="langsw"><button id="swEn" onclick="setLang('en')">EN</button><button id="swZh" onclick="setLang('zh')">中文</button></span>
 </div></header>
@@ -31,6 +31,7 @@
   <p class="kicker"><span class="en">Agent ID gated launchpad · BNB Chain</span><span class="zh">Agent ID 把关的发行平台 · BNB 链</span> <span class="chip" id="demoChip">Demo curve</span></p>
   <h1 class="display"><span class="en">Every agent<br>gets a <em>curve.</em></span><span class="zh">每个代理<br>都有一条<em>曲线。</em></span></h1>
   <p class="lede"><span class="en">New tokens launch on a bonding curve that only Binance Agent ID holders can buy before graduation. Snipers and scripts stay outside. Holders of a CoinFin Pass collect the floor: BNB dividends every season, plus a FIN claim per Pass.</span><span class="zh">新代币在联合曲线上发行,毕业前只有币安 Agent ID 持有者可以买入。狙击手和脚本被挡在门外。CoinFin Pass 持有者收取底层收益:每季 BNB 分红,外加每个 Pass 一份 FIN 领取。</span></p>
+  <div class="btnrow"><a class="btn" href="#pass"><span class="en">Mint a Pass</span><span class="zh">铸造 Pass</span></a><a class="btn ghost" href="#claim"><span class="en">Check a Pass</span><span class="zh">检查 Pass</span></a><a class="btn ghost" href="#board"><span class="en">Launch board</span><span class="zh">发行板</span></a></div>
   <div class="curve-stage">
     <canvas id="curveCanvas"></canvas>
     <span class="grad-tag">GRADUATION · 8 BNB</span>
@@ -47,7 +48,7 @@
   </div>
   <div class="season">
     <div><div class="lbl"><span class="en">Season</span><span class="zh">季度</span></div><div class="n">S<span id="seasonNo">1</span></div></div>
-    <div class="muted" style="font-size:14.5px"><span class="en">Seasons run 14 days. At each season close, the dividend vault splits its BNB across Pass holders, one share per Pass. Season 1 opens at launch.</span><span class="zh">每季 14 天。每季结束时,分红金库把 BNB 按每张 Pass 一份分给持有者。第 1 季随上线开启。</span></div>
+    <div class="muted" style="font-size:14.5px"><span class="en">Seasons run 14 days. At each season close, the dividend vault splits its BNB across Pass holders, one share per Pass. Season 1 is live now.</span><span class="zh">每季 14 天。每季结束时,分红金库把 BNB 按每张 Pass 一份分给持有者。第 1 季已经开启。</span></div>
     <div class="count"><span class="lbl"><span class="en">Ends in</span><span class="zh">结束倒计时</span></span><b id="seasonCount">TBA</b></div>
   </div>
 </section>
@@ -83,7 +84,7 @@ Follow the CoinFin skill file at https://coinfin.fun/coinfin-skill.md.
 
 <section class="blk rv" id="claim">
   <div class="sec-head"><span class="sec-no">02</span><h2 class="sec"><span class="en">Passes <em>collect.</em></span><span class="zh">Pass 会<em>收款。</em></span></h2></div>
-  <p class="sec-sub"><span class="en">Two payouts ride on every Pass. Trading tax on every curve sends 1% of each trade into the dividend vault for Pass holders, and each Pass claims 250,000 FIN once. Check any Pass below; the checker reads chain state directly once the contracts are live.</span><span class="zh">每张 Pass 挂着两笔收益。每条曲线交易税的 1% 进入分红金库归 Pass 持有者,每张 Pass 还可一次性领取 250,000 FIN。在下方检查任意 Pass;合约上线后检查器直接读取链上状态。</span></p>
+  <p class="sec-sub"><span class="en">Two payouts ride on every Pass. Trading tax on every curve sends 1% of each trade into the dividend vault for Pass holders, and each Pass claims 250,000 FIN once. Check any Pass below; the checker reads chain state directly.</span><span class="zh">每张 Pass 挂着两笔收益。每条曲线交易税的 1% 进入分红金库归 Pass 持有者,每张 Pass 还可一次性领取 250,000 FIN。在下方检查任意 Pass;检查器直接读取链上状态。</span></p>
   <div class="grid2">
     <div class="ticket">
       <h3><span class="en">Check a Pass</span><span class="zh">检查一张 Pass</span></h3>
@@ -91,6 +92,7 @@ Follow the CoinFin skill file at https://coinfin.fun/coinfin-skill.md.
       <div class="ckrow"><input class="field" id="ckId" inputmode="numeric" placeholder="Token ID, e.g. 42"><button class="btn" id="ckGo"><span class="en">Check</span><span class="zh">检查</span></button></div>
       <div class="ck-result" id="ckResult"></div>
       <div class="row"><span><span class="en">FIN PER PASS</span><span class="zh">每 PASS 的 FIN</span></span><b>250,000 FIN</b></div>
+      <div class="row"><span><span class="en">FIN CLAIM POOL</span><span class="zh">FIN 领取池</span></span><b id="stClaimPool">···</b></div>
       <div class="row"><span><span class="en">DIVIDEND SOURCE</span><span class="zh">分红来源</span></span><b>1% OF EVERY CURVE TRADE</b></div>
       <div class="row"><span><span class="en">SEASON LENGTH</span><span class="zh">季度长度</span></span><b>14 DAYS</b></div>
     </div>
@@ -101,7 +103,7 @@ Follow the CoinFin skill file at https://coinfin.fun/coinfin-skill.md.
         <div class="chead"><span class="ctitle">Agent prompt · Claim</span><button class="copybtn" data-copy="promptClaim">COPY</button></div>
         <pre id="promptClaim">Use my Binance Agentic Wallet on BNB Chain (chainId 56).
 Follow the CoinFin skill file at https://coinfin.fun/coinfin-skill.md.
-1. For each CoinFin Pass I own, check claimedById on the FIN claim contract and dividendOf on the vault for the current season.
+1. For each CoinFin Pass I own, check claimedById on the FIN claim contract and dividendFor on the vault for the current season.
 2. Claim every open FIN claim (250,000 FIN per Pass) and every open season dividend.
 3. Show me each contract-call preview first, then execute and return the transaction hashes.</pre>
       </div>
@@ -112,7 +114,7 @@ Follow the CoinFin skill file at https://coinfin.fun/coinfin-skill.md.
 <section class="blk rv" id="board">
   <div class="sec-head"><span class="sec-no">03</span><h2 class="sec"><span class="en">Live on the <em>curve.</em></span><span class="zh">在<em>曲线</em>上直播。</span></h2></div>
   <p class="sec-sub"><span class="en">Every launch trades on its own curve until its reserve reaches 8 BNB, then it graduates to PancakeSwap V2 and its LP is burned.</span><span class="zh">每个发行都在自己的曲线上交易,直到储备达到 8 BNB,随后毕业到 PancakeSwap V2 且 LP 被烧毁。</span></p>
-  <div class="note" id="boardNote"><b><span class="en">Pre-launch board.</span><span class="zh">上线前的展示板。</span></b> <span class="en">The curve contracts are not deployed yet, so the board below runs a labelled demo with invented tokens. Nothing here is real market data; live launches replace it the moment the factory is deployed.</span><span class="zh">曲线合约尚未部署,因此下方展示板运行的是标注清楚的演示,使用虚构代币。这里没有任何真实市场数据;工厂部署后将立即替换为真实发行。</span></div>
+  <div class="note" id="boardNote"><b><span class="en">Factory is live.</span><span class="zh">工厂已上线。</span></b> <span class="en">No launches yet: the board fills the moment the first token launches on the curve. Every figure on this page reads straight from chain.</span><span class="zh">尚无发行:第一个代币在曲线上发行时,展示板立即填充。本页所有数字直接读取链上数据。</span></div>
   <div class="grid3" id="launchGrid"></div>
 </section>
 
@@ -135,8 +137,9 @@ Follow the CoinFin skill file at https://coinfin.fun/coinfin-skill.md.
 <footer class="site"><div class="wrap">
 <div class="foot-in">
 <div>
-<a class="brand" href="index.html"><img src="img/logo.svg?v=1" alt="CoinFin Curve"><span>COINFIN<span class="sub">CURVE</span></span></a>
+<a class="brand" href="index.html"><img src="img/logo-final.svg?v=2" alt="CoinFin Curve"><span>COINFIN<span class="sub">CURVE</span></span></a>
 <p class="muted" style="margin-top:12px;font-size:14px"><span class="en">Bonding curve launches gated by Binance Agent ID, with a Pass that collects.</span><span class="zh">由币安 Agent ID 把关的联合曲线发行,配一张会分红的 Pass。</span></p>
+<a class="social" href="https://x.com/coinfinfun" target="_blank" rel="noopener">X · @coinfinfun</a>
 </div>
 <div><h4><span class="en">Project</span><span class="zh">项目</span></h4>
 <a href="index.html"><span class="en">Home</span><span class="zh">首页</span></a>
@@ -160,8 +163,8 @@ Follow the CoinFin skill file at https://coinfin.fun/coinfin-skill.md.
 </div>
 <div class="foot-base"><span>COINFIN CURVE · BNB CHAIN · CHAIN ID 56</span><span>coinfin.fun</span></div>
 </div></footer>
-<script src="js/app.js?v=1"></script>
+<script src="js/app.js?v=2"></script>
 <script>setLang(document.documentElement.getAttribute("data-lang") || "en");</script>
-<script src="js/board.js?v=1"></script><script src="js/claim.js?v=1"></script><script src="js/curve.js?v=1"></script>
+<script src="js/board.js?v=2"></script><script src="js/claim.js?v=2"></script><script src="js/curve.js?v=2"></script>
 </body>
 </html>
