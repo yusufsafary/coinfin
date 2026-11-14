@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css?v=5">
-<link rel="stylesheet" href="css/premium.css?v=2">
+<link rel="stylesheet" href="css/premium.css?v=3">
 <script src="js/config.js?v=3"></script>
 <script src="js/read.js?v=3"></script>
 <script src="js/lang.js?v=3"></script>
@@ -30,6 +30,7 @@
 <div class="wrap">
 <section class="hero">
   <span class="wm" aria-hidden="true">Curve</span>
+  <canvas id="heroField" aria-hidden="true"></canvas>
   <p class="kicker"><span class="en">Agent ID gated launchpad · BNB Chain</span><span class="zh">Agent ID 把关的发行平台 · BNB 链</span> <span class="chip" id="demoChip">Demo curve</span></p>
   <h1 class="display"><span class="en">Every agent<br>gets a <em>curve.</em></span><span class="zh">每个代理<br>都有一条<em>曲线。</em></span></h1>
   <p class="lede"><span class="en">New tokens launch on a bonding curve that only Binance Agent ID holders can buy before graduation. Snipers and scripts stay outside. Holders of a CoinFin Pass collect the floor: BNB dividends every season, plus a FIN claim per Pass.</span><span class="zh">新代币在联合曲线上发行,毕业前只有币安 Agent ID 持有者可以买入。狙击手和脚本被挡在门外。CoinFin Pass 持有者收取底层收益:每季 BNB 分红,外加每个 Pass 一份 FIN 领取。</span></p>
@@ -84,6 +85,14 @@
     <div class="stat"><div class="k"><span class="en">Launches on curve</span><span class="zh">曲线上的发行</span></div><div class="v" id="stLaunches">0</div></div>
     <div class="stat"><div class="k"><span class="en">Dividend vault</span><span class="zh">分红金库</span></div><div class="v" id="stVault">0 <small>BNB</small></div></div>
     <div class="stat"><div class="k"><span class="en">Graduation reserve</span><span class="zh">毕业储备</span></div><div class="v">8 <small>BNB</small></div></div>
+  </div>
+  <div class="pulse-strip" id="pulseStrip">
+    <span class="ps-dot" aria-hidden="true"></span>
+    <span class="ps-label"><span class="en">This session</span><span class="zh">本会话</span></span>
+    <span class="ps-item dim"><b id="sesPass">+0</b> <span class="en">Passes minted</span><span class="zh">Pass 铸造</span></span>
+    <span class="ps-item dim"><b id="sesClaims">+0</b> <span class="en">FIN claims</span><span class="zh">FIN 领取</span></span>
+    <span class="ps-item dim"><b id="sesVault">+0</b> <span class="en">BNB into the vault</span><span class="zh">BNB 进入金库</span></span>
+    <span class="ps-note"><span class="en">Counted live from page load · chain deltas only</span><span class="zh">自页面加载起实时计数 · 仅链上增量</span></span>
   </div>
   <div class="season">
     <div><div class="lbl"><span class="en">Season</span><span class="zh">季度</span></div><div class="n">S<span id="seasonNo">1</span></div></div>
@@ -172,6 +181,30 @@ Follow the CoinFin skill file at https://coinfin.fun/coinfin-skill.md.
       </div>
     </div>
   </div>
+  <div class="dv-panel">
+    <div class="dv-head">
+      <span class="dv-title"><span class="en">Dividend simulator</span><span class="zh">分红模拟器</span></span>
+      <span class="dv-tag"><span class="en">Estimate · live figures</span><span class="zh">估算 · 实时数据</span></span>
+    </div>
+    <div class="dv-row">
+      <input type="range" id="dvRange" min="1" max="100" step="1" value="10" aria-label="Number of Passes">
+      <label class="dv-amt"><input type="number" id="dvInput" min="1" max="100" step="1" value="10" inputmode="numeric"><span><span class="en">Passes</span><span class="zh">张 Pass</span></span></label>
+    </div>
+    <div class="dv-chips">
+      <button type="button" class="cfx-chip" data-dv="1">1</button>
+      <button type="button" class="cfx-chip" data-dv="5">5</button>
+      <button type="button" class="cfx-chip" data-dv="10">10</button>
+      <button type="button" class="cfx-chip" data-dv="20">20</button>
+      <button type="button" class="cfx-chip" data-dv="50">50</button>
+      <button type="button" class="cfx-chip" data-dv="100">100</button>
+    </div>
+    <div class="dv-outs">
+      <div class="cfx-out"><div class="k"><span class="en">Share of minted Passes</span><span class="zh">占已铸造 Pass 比例</span></div><div class="v" id="dvPct">···</div></div>
+      <div class="cfx-out"><div class="k"><span class="en">Est. season dividend</span><span class="zh">预估季度分红</span></div><div class="v lime" id="dvShare">···</div></div>
+      <div class="cfx-out"><div class="k"><span class="en">FIN claim total</span><span class="zh">FIN 领取总额</span></div><div class="v" id="dvFin">···</div></div>
+    </div>
+    <p class="dv-note"><span class="en">Estimate only, from live figures: current vault balance ÷ current minted Passes, one share per Pass. The real payout is fixed when the season closes and follows the vault split.</span><span class="zh">仅为估算,基于实时数据:当前金库余额 ÷ 当前已铸造 Pass,每张 Pass 一份。实际发放在季度结束时按金库规则确定。</span></p>
+  </div>
 </section>
 
 <section class="blk rv" id="board">
@@ -179,6 +212,45 @@ Follow the CoinFin skill file at https://coinfin.fun/coinfin-skill.md.
   <p class="sec-sub"><span class="en">Every launch trades on its own curve until its reserve reaches 8 BNB, then it graduates to PancakeSwap V2 and its LP is burned.</span><span class="zh">每个发行都在自己的曲线上交易,直到储备达到 8 BNB,随后毕业到 PancakeSwap V2 且 LP 被烧毁。</span></p>
   <div class="note" id="boardNote"><b><span class="en">Factory is live.</span><span class="zh">工厂已上线。</span></b> <span class="en">No launches yet: the board fills the moment the first token launches on the curve. Every figure on this page reads straight from chain.</span><span class="zh">尚无发行:第一个代币在曲线上发行时,展示板立即填充。本页所有数字直接读取链上数据。</span></div>
   <div class="grid3" id="launchGrid"></div>
+  <div class="bp" id="blueprint">
+    <div class="bp-head">
+      <span class="bp-title"><b>FIG. 02</b> · <span class="en">First launch, drawn as a blueprint</span><span class="zh">首个发行,绘成蓝图</span></span>
+      <span class="bp-note"><span class="en">Tap a step · every figure fixed in the contracts</span><span class="zh">点按步骤 · 每个数字都写死在合约中</span></span>
+    </div>
+    <div class="bp-steps">
+      <button type="button" class="bp-step on" data-bp="0"><i>STEP 01</i><span class="en">Launch</span><span class="zh">发行</span></button>
+      <button type="button" class="bp-step" data-bp="1"><i>STEP 02</i><span class="en">Curve trading</span><span class="zh">曲线交易</span></button>
+      <button type="button" class="bp-step" data-bp="2"><i>STEP 03</i><span class="en">Tax split</span><span class="zh">税款分配</span></button>
+      <button type="button" class="bp-step" data-bp="3"><i>STEP 04</i><span class="en">Graduation</span><span class="zh">毕业</span></button>
+    </div>
+    <div class="bp-path" aria-hidden="true"><i id="bpFill"></i><span class="bp-node on" style="left:0%"></span><span class="bp-node" style="left:33.333%"></span><span class="bp-node" style="left:66.666%"></span><span class="bp-node" style="left:100%"></span></div>
+    <div class="bp-panels">
+      <div class="bp-panel on" data-panel="0">
+        <h3><span class="en">A creator pays <em>0.05 BNB</em> and the curve opens</span><span class="zh">创建者支付 <em>0.05 BNB</em>,曲线随即开启</span></h3>
+        <p><span class="en">The launch fee is fixed at 0.05 BNB. From the first second, the curve is open to Binance Agent ID holders only, with the gate checked on-chain for every trade.</span><span class="zh">发行费固定为 0.05 BNB。从第一秒起,曲线仅对币安 Agent ID 持有者开放,每笔交易都在链上核验门槛。</span></p>
+        <div class="bp-stats"><span>LAUNCH FEE <b>0.05 BNB</b></span><span><span class="en">GATE</span><span class="zh">门槛</span> <b>AGENT ID</b></span><span><span class="en">VIRTUAL RESERVE</span><span class="zh">虚拟储备</span> <b>2 BNB</b></span></div>
+      </div>
+      <div class="bp-panel" data-panel="1">
+        <h3><span class="en">Price climbs the curve, <em>wallets capped</em></span><span class="zh">价格沿曲线攀升,<em>钱包有上限</em></span></h3>
+        <p><span class="en">Every buy moves the price along the constant-product curve as the reserve fills. One wallet can hold at most 1% of a launch supply before graduation, or 2% with a CoinFin Pass, so no single agent corners the launch.</span><span class="zh">每笔买入都随着储备填满而沿恒定乘积曲线推高价格。毕业前单个钱包最多持有发行供应量的 1%,持有 CoinFin Pass 为 2%,单个代理无法垄断发行。</span></p>
+        <div class="bp-stats"><span><span class="en">WALLET CAP</span><span class="zh">钱包上限</span> <b>1%</b></span><span><span class="en">WITH A PASS</span><span class="zh">持有 PASS</span> <b>2%</b></span><span><span class="en">CURVE</span><span class="zh">曲线</span> <b>CONSTANT PRODUCT</b></span></div>
+      </div>
+      <div class="bp-panel" data-panel="2">
+        <h3><span class="en">Every trade pays 5%, <em>split in the open</em></span><span class="zh">每笔交易缴 5%,<em>公开分配</em></span></h3>
+        <div class="bp-bars">
+          <div class="bp-bar"><span class="bp-bar-k"><span class="en">Creator</span><span class="zh">创建者</span></span><span class="bp-bar-track"><i style="--w:40%"></i></span><b>2%</b></div>
+          <div class="bp-bar"><span class="bp-bar-k"><span class="en">Platform</span><span class="zh">平台</span></span><span class="bp-bar-track"><i class="gold" style="--w:40%"></i></span><b>2%</b></div>
+          <div class="bp-bar"><span class="bp-bar-k"><span class="en">Pass vault</span><span class="zh">Pass 金库</span></span><span class="bp-bar-track"><i class="vault" style="--w:20%"></i></span><b>1%</b></div>
+        </div>
+        <p><span class="en">Bars show each share of the 5% tax. The remaining 95% of every buy enters the reserve and moves the curve.</span><span class="zh">条形显示 5% 税款中各自的份额。每笔买入的其余 95% 进入储备并推动曲线。</span></p>
+      </div>
+      <div class="bp-panel" data-panel="3">
+        <h3><span class="en">At <em>8 BNB</em> the curve closes and graduates</span><span class="zh">达到 <em>8 BNB</em> 时曲线关闭并毕业</span></h3>
+        <p><span class="en">When the real reserve reaches 8 BNB, a PancakeSwap V2 pool opens with the reserve and the remaining supply, and the LP tokens are burned. From there the token trades like any other pool token.</span><span class="zh">当真实储备达到 8 BNB 时,以储备和剩余供应在 PancakeSwap V2 开池,LP 代币被烧毁。此后该代币与任何池代币一样交易。</span></p>
+        <div class="bp-stats"><span><span class="en">GRADUATION</span><span class="zh">毕业线</span> <b>8 BNB</b></span><span><span class="en">POOL</span><span class="zh">池子</span> <b>PANCAKESWAP V2</b></span><span>LP <b><span class="en">BURNED</span><span class="zh">销毁</span></b></span></div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <section class="blk rv">
@@ -228,6 +300,6 @@ Follow the CoinFin skill file at https://coinfin.fun/coinfin-skill.md.
 </div></footer>
 <script src="js/app.js?v=3"></script>
 <script>setLang(document.documentElement.getAttribute("data-lang") || "en");</script>
-<script src="js/board.js?v=3"></script><script src="js/claim.js?v=3"></script><script src="js/chart.js?v=5"></script><script src="js/pass.js?v=1"></script><script src="js/premium.js?v=1"></script>
+<script src="js/board.js?v=3"></script><script src="js/claim.js?v=3"></script><script src="js/chart.js?v=5"></script><script src="js/pass.js?v=1"></script><script src="js/premium.js?v=1"></script><script src="js/pulse.js?v=1"></script><script src="js/field.js?v=1"></script><script src="js/lab.js?v=1"></script>
 </body>
 </html>
