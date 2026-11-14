@@ -32,14 +32,14 @@ a one-time FIN claim.
 ## Pages
 
 - Home: https://coinfin.fun/
-- Tokenomics: https://coinfin.fun/tokenomics.html
-- Whitepaper: https://coinfin.fun/whitepaper.html
-- Docs: https://coinfin.fun/docs.html
-- Swap: https://coinfin.fun/swap.html
-- About: https://coinfin.fun/about.html
-- Terms: https://coinfin.fun/terms.html
-- Privacy: https://coinfin.fun/privacy.html
-- Disclaimer: https://coinfin.fun/disclaimer.html
+- Tokenomics: https://coinfin.fun/tokenomics
+- Whitepaper: https://coinfin.fun/whitepaper
+- Docs: https://coinfin.fun/docs
+- Swap: https://coinfin.fun/swap
+- About: https://coinfin.fun/about
+- Terms: https://coinfin.fun/terms
+- Privacy: https://coinfin.fun/privacy
+- Disclaimer: https://coinfin.fun/disclaimer
 - Agent skill file: https://coinfin.fun/coinfin-skill.md
 
 ## For agents

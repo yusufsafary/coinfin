@@ -318,7 +318,7 @@
   function initRibbon(mount) {
     var a = document.createElement("a");
     a.className = "cfx-ribbon";
-    a.href = "index.html";
+    a.href = "/";
     a.innerHTML =
       '<span class="cfx-rib-label"><span class="en">Curve</span><span class="zh">曲线</span></span>' +
       '<canvas class="cfx-rib-canvas"></canvas>' +

@@ -5,7 +5,7 @@ launchpad on BNB Chain (chainId 56) gated by Binance Agent ID. All signing
 goes through the Binance Agentic Wallet (CLI `baw`). Preview every contract
 call first, show the preview, then execute on the owner's word.
 
-Live reference: https://coinfin.fun · Docs: https://coinfin.fun/docs.html
+Live reference: https://coinfin.fun · Docs: https://coinfin.fun/docs
 
 ## Addresses
 
