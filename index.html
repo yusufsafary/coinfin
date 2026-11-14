@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=3">
+<link rel="stylesheet" href="css/style.css?v=4">
 <link rel="stylesheet" href="css/premium.css?v=1">
 <script src="js/config.js?v=3"></script>
 <script src="js/read.js?v=3"></script>
@@ -38,6 +38,7 @@
   <figcaption class="plate-cap"><span><b>FIG. 01</b> · <span class="en">Bonding curve, read live</span><span class="zh">联合曲线,实时读取</span></span><span class="r"><span class="en">Reserve axis</span><span class="zh">储备轴</span> · 0 → 8 BNB</span></figcaption>
   <div class="curve-stage">
     <canvas id="curveCanvas"></canvas>
+    <div id="curveTip"></div>
     <span class="grad-tag">GRADUATION · 8 BNB</span>
     <div class="curve-meta">
       <div class="big-pct" id="heroPct">0.0% <small>TO GRADUATION</small></div>
@@ -45,7 +46,39 @@
     </div>
   </div>
   </figure>
-  <p class="curve-hint"><span class="en">Drag across the curve to preview the road to graduation</span><span class="zh">在曲线上拖动,预览通往毕业的路</span></p>
+  <p class="curve-hint"><span class="en">Move across the curve for live price readings · simulate a buy below</span><span class="zh">在曲线上移动查看实时价格 · 在下方模拟买入</span></p>
+  <div class="cfx-controls">
+    <div class="cfx-toggle" role="group" aria-label="Chart view">
+      <button type="button" data-view="price" class="on"><span class="en">Price</span><span class="zh">价格</span></button>
+      <button type="button" data-view="tokens"><span class="en">Tokens / BNB</span><span class="zh">每 BNB 代币</span></button>
+    </div>
+    <span class="cfx-sim-note"><span class="en">Real curve math · virtual reserve 2 BNB · spot = virtual BNB / token reserve</span><span class="zh">真实曲线公式 · 虚拟储备 2 BNB · 现价 = 虚拟 BNB / 代币储备</span></span>
+  </div>
+  <div class="cfx-sim">
+    <div class="cfx-sim-head">
+      <span class="cfx-sim-title"><span class="en">Simulate a buy</span><span class="zh">模拟买入</span></span>
+      <span class="cfx-sim-note"><span class="en">Simulation only · buys happen through your agent</span><span class="zh">仅模拟 · 买入通过你的代理完成</span></span>
+    </div>
+    <div class="cfx-sim-row">
+      <input type="range" id="simRange" min="0" max="8.42" step="0.01" value="0" aria-label="Buy amount in BNB">
+      <label class="cfx-amt"><input type="number" id="simInput" min="0" step="0.05" placeholder="0.00" inputmode="decimal"><span>BNB</span></label>
+    </div>
+    <div class="cfx-chips">
+      <button type="button" class="cfx-chip" data-sim="0.1">0.1 BNB</button>
+      <button type="button" class="cfx-chip" data-sim="0.5">0.5 BNB</button>
+      <button type="button" class="cfx-chip" data-sim="1">1 BNB</button>
+      <button type="button" class="cfx-chip" data-sim="2">2 BNB</button>
+      <button type="button" class="cfx-chip" data-sim="0"><span class="en">Reset</span><span class="zh">重置</span></button>
+    </div>
+    <div class="cfx-outs">
+      <div class="cfx-out"><div class="k"><span class="en">Tokens received</span><span class="zh">获得代币</span></div><div class="v lime" id="simTokens">···</div></div>
+      <div class="cfx-out"><div class="k"><span class="en">Average price</span><span class="zh">平均价格</span></div><div class="v" id="simAvg">···</div></div>
+      <div class="cfx-out"><div class="k"><span class="en">Price impact</span><span class="zh">价格影响</span></div><div class="v" id="simImpact">···</div></div>
+      <div class="cfx-out"><div class="k"><span class="en">Progress after</span><span class="zh">买入后进度</span></div><div class="v" id="simProg">0.0%</div></div>
+    </div>
+    <p class="cfx-tax"><span class="en">Every buy pays a 5% tax from the BNB spent: <b>2% creator · 2% platform · 1% Pass dividend vault</b>. The remaining 95% enters the reserve and moves the curve. Per-wallet cap: 1% of supply, 2% with a Pass.</span><span class="zh">每笔买入从支出 BNB 中收取 5% 税:<b>2% 创作者 · 2% 平台 · 1% Pass 分红金库</b>。其余 95% 进入储备并推动曲线。每钱包上限:供应量的 1%,持有 Pass 为 2%。</span></p>
+    <p id="simNote" style="display:none"><span class="en">This buy graduates the curve: reserve reaches 8 BNB and the pair opens on PancakeSwap V2 with LP burned.</span><span class="zh">这笔买入让曲线毕业:储备达到 8 BNB,在 PancakeSwap V2 开盘,LP 销毁。</span></p>
+  </div>
   <div class="stats">
     <div class="stat"><div class="k"><span class="en">Pass minted</span><span class="zh">已铸造 Pass</span></div><div class="v" id="stPassMinted">··· <small>/ 10,000</small></div></div>
     <div class="stat"><div class="k"><span class="en">Launches on curve</span><span class="zh">曲线上的发行</span></div><div class="v" id="stLaunches">0</div></div>
@@ -190,6 +223,6 @@ Follow the CoinFin skill file at https://coinfin.fun/coinfin-skill.md.
 </div></footer>
 <script src="js/app.js?v=3"></script>
 <script>setLang(document.documentElement.getAttribute("data-lang") || "en");</script>
-<script src="js/board.js?v=3"></script><script src="js/claim.js?v=3"></script><script src="js/curve.js?v=3"></script><script src="js/premium.js?v=1"></script>
+<script src="js/board.js?v=3"></script><script src="js/claim.js?v=3"></script><script src="js/chart.js?v=4"></script><script src="js/premium.js?v=1"></script>
 </body>
 </html>
