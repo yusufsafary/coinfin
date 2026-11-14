@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css?v=4">
-<link rel="stylesheet" href="css/premium.css?v=1">
+<link rel="stylesheet" href="css/premium.css?v=2">
 <script src="js/config.js?v=3"></script>
 <script src="js/read.js?v=3"></script>
 <script src="js/lang.js?v=3"></script>
@@ -103,8 +103,8 @@
         <span class="pass-chip"><span class="en">Specimen · Season 1</span><span class="zh">样本 · 第 1 季</span></span>
       </div>
       <div class="pass-mid">
-        <svg class="pass-glyph" viewBox="0 0 200 92" fill="none" aria-hidden="true"><path d="M4 88 C 60 84, 96 66, 128 40 C 152 20, 176 8, 196 4" stroke="#a8e10c" stroke-width="4" stroke-linecap="round"/><line x1="4" y1="18" x2="196" y2="18" stroke="#e8b84b" stroke-width="2" stroke-dasharray="6 6"/><circle cx="196" cy="4" r="5" fill="#eef7ee"/></svg>
-        <div class="pass-no"><div class="k"><span class="en">Supply</span><span class="zh">供应</span></div><div class="v">10,000</div></div>
+        <div class="pass-chart"><span class="pass-chart-tag"><span class="en">Curve · live</span><span class="zh">曲线 · 实时</span></span><canvas id="passCanvas"></canvas></div>
+        <div class="pass-no"><div class="k"><span class="en">Minted · of 10,000</span><span class="zh">已铸造 · 共 10,000</span></div><div class="v" id="passMinted">···</div><div class="pass-mintbar"><i id="passMintBar"></i></div></div>
       </div>
       <div class="pass-bot"><span><span class="en">FIN claim</span><span class="zh">FIN 领取</span> <b>250,000</b></span><span><span class="en">Dividend</span><span class="zh">分红</span> <b>1 share / season</b></span><span><span class="en">Curve cap</span><span class="zh">曲线额度</span> <b>2%</b></span></div>
     </div>
@@ -113,6 +113,11 @@
       <p><span class="en">One object carries every right the floor offers: a wider curve cap, a dividend share each season, and a FIN claim that follows whoever holds it. Minting runs through your agent, never through a wallet button on this page.</span><span class="zh">一件物品承载大厅的全部权利:更宽的曲线额度、每季一份分红,以及跟随持有者的 FIN 领取。铸造通过你的代理完成,本页从不设置钱包按钮。</span></p>
       <div class="mini"><span>FIRST MINT <b>FREE</b></span><span>MAX <b>20 / WALLET</b></span><span>GATE <b>AGENT ID</b></span></div>
     </div>
+  </div>
+  <div class="pass-live">
+    <div class="pl-tile"><div class="k"><span class="en">Dividend vault · live</span><span class="zh">分红金库 · 实时</span></div><div class="v" id="passVault">···</div></div>
+    <div class="pl-tile"><div class="k"><span class="en">FIN claimed so far</span><span class="zh">已领取 FIN</span></div><div class="v" id="passClaimed">···</div></div>
+    <div class="pl-tile"><div class="k"><span class="en">Season</span><span class="zh">第</span> <span id="passSeasonNo">1</span> <span class="en">ends in</span><span class="zh">季结束</span></div><div class="v gold" id="passSeasonCount">···</div></div>
   </div>
   <div class="grid2">
     <div class="ticket">
@@ -223,6 +228,6 @@ Follow the CoinFin skill file at https://coinfin.fun/coinfin-skill.md.
 </div></footer>
 <script src="js/app.js?v=3"></script>
 <script>setLang(document.documentElement.getAttribute("data-lang") || "en");</script>
-<script src="js/board.js?v=3"></script><script src="js/claim.js?v=3"></script><script src="js/chart.js?v=4"></script><script src="js/premium.js?v=1"></script>
+<script src="js/board.js?v=3"></script><script src="js/claim.js?v=3"></script><script src="js/chart.js?v=4"></script><script src="js/pass.js?v=1"></script><script src="js/premium.js?v=1"></script>
 </body>
 </html>

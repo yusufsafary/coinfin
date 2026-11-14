@@ -155,3 +155,53 @@ body.home footer.site::before {
   body.home .pass-card { transform: none; transition: none; }
   body.home .pass-card::after { display: none; }
 }
+
+/* ---------- Pass specimen v2: living chart, live strip, idle sheen ---------- */
+body.home .pass-card::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 3;
+  background: linear-gradient(115deg, transparent 32%, rgba(238, 247, 238, 0.09) 46%, rgba(232, 184, 75, 0.07) 52%, transparent 64%);
+  transform: translateX(-75%);
+  animation: passSheen 8s ease-in-out infinite;
+}
+@keyframes passSheen {
+  0% { transform: translateX(-75%); }
+  22% { transform: translateX(75%); }
+  100% { transform: translateX(75%); }
+}
+body.home .pass-chart { flex: 1 1 auto; min-width: 0; position: relative; }
+body.home .pass-chart canvas { display: block; width: 100%; height: clamp(62px, 11vw, 92px); }
+body.home .pass-chart-tag {
+  position: absolute; left: 2px; top: -15px;
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.26em;
+  color: var(--gold); text-transform: uppercase; white-space: nowrap;
+}
+body.home .pass-mintbar {
+  height: 5px; width: min(150px, 100%); margin: 8px 0 0 auto;
+  background: rgba(238, 247, 238, 0.14); border-radius: 3px; overflow: hidden;
+}
+body.home .pass-mintbar i {
+  display: block; height: 100%; width: 0;
+  background: linear-gradient(90deg, var(--lime), var(--gold));
+  border-radius: 3px; transition: width 1.2s ease;
+}
+body.home .pass-live {
+  display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; margin-top: 14px;
+}
+@media (min-width: 760px) { body.home .pass-live { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+body.home .pl-tile {
+  border: 1px solid var(--line); border-radius: 14px; padding: 13px 15px;
+  background: linear-gradient(180deg, rgba(13, 42, 31, 0.55), rgba(6, 18, 14, 0.35));
+}
+body.home .pl-tile .k {
+  font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.16em;
+  color: var(--faint); text-transform: uppercase;
+}
+body.home .pl-tile .v {
+  font-family: var(--mono); font-weight: 700; font-size: clamp(19px, 3.4vw, 24px);
+  color: var(--paper); margin-top: 4px; overflow-wrap: anywhere;
+}
+body.home .pl-tile .v.gold { color: var(--gold); }
+@media (prefers-reduced-motion: reduce) {
+  body.home .pass-card::before { display: none; }
+  body.home .pass-mintbar i { transition: none; }
+}
